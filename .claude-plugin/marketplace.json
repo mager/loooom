@@ -1,0 +1,79 @@
+{
+  "name": "loooom",
+  "owner": {
+    "name": "Mager",
+    "email": "andrew.mager@gmail.com"
+  },
+  "metadata": {
+    "description": "The best plugin marketplace for Claude Code. Skills from real humans, for real agents.",
+    "homepage": "https://loooom.xyz"
+  },
+  "plugins": [
+    {
+      "name": "beginner-japanese",
+      "source": "./plugins/beginner-japanese",
+      "description": "Learn conversational Japanese for traveling in Japan. Tracks progress across sessions with mem0 or local file.",
+      "version": "2.1.0",
+      "author": { "name": "mager" },
+      "category": "languages",
+      "keywords": ["japanese", "language", "travel", "japan"],
+      "homepage": "https://loooom.xyz/p/mager/beginner-japanese",
+      "license": "MIT"
+    },
+    {
+      "name": "kana-ascii",
+      "source": "./plugins/kana-ascii",
+      "description": "Render hiragana, katakana, and kanji as ASCII art. Teaches stroke order and mnemonics. Backed by the kana-ascii npm package.",
+      "version": "2.0.0",
+      "author": { "name": "mager" },
+      "category": "languages",
+      "keywords": ["japanese", "kana", "ascii", "hiragana", "katakana"],
+      "homepage": "https://loooom.xyz/p/mager/kana-ascii",
+      "license": "MIT"
+    },
+    {
+      "name": "learn-anything",
+      "source": "./plugins/learn-anything",
+      "description": "Benjamin Franklin's autodidact method for mastering any subject.",
+      "version": "1.0.0",
+      "author": { "name": "loooom" },
+      "category": "learning",
+      "keywords": ["learning", "study", "mastery", "autodidact", "franklin"],
+      "homepage": "https://loooom.xyz/p/loooom/learn-anything",
+      "license": "MIT"
+    },
+    {
+      "name": "socratic-thinking",
+      "source": "./plugins/socratic-thinking",
+      "description": "Plato's Socratic method for questioning assumptions and first-principles thinking.",
+      "version": "1.0.0",
+      "author": { "name": "loooom" },
+      "category": "thinking",
+      "keywords": ["philosophy", "socratic", "reasoning", "critical-thinking"],
+      "homepage": "https://loooom.xyz/p/loooom/socratic-thinking",
+      "license": "MIT"
+    },
+    {
+      "name": "persuasive-writing",
+      "source": "./plugins/persuasive-writing",
+      "description": "Abraham Lincoln's techniques for speechwriting and persuasion.",
+      "version": "1.0.0",
+      "author": { "name": "loooom" },
+      "category": "writing",
+      "keywords": ["writing", "speechwriting", "persuasion", "lincoln", "rhetoric"],
+      "homepage": "https://loooom.xyz/p/loooom/persuasive-writing",
+      "license": "MIT"
+    },
+    {
+      "name": "frontend-design",
+      "source": "./plugins/frontend-design",
+      "description": "A frontend design agent. Every UI should feel hot, sleek, usable, fun, and addictive.",
+      "version": "1.0.0",
+      "author": { "name": "mager" },
+      "category": "design",
+      "keywords": ["design", "frontend", "ui", "ux", "css"],
+      "homepage": "https://loooom.xyz/p/mager/frontend-design",
+      "license": "MIT"
+    }
+  ]
+}

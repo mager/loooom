@@ -1,0 +1,5 @@
+{
+  "name": "kana-ascii",
+  "description": "Render hiragana/katakana as ASCII art with stroke order and mnemonics.",
+  "version": "2.0.0"
+}
