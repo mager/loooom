@@ -1,8 +1,9 @@
 ---
 name: socratic-thinking
 description: Plato's Socratic method for questioning assumptions and building arguments from first principles
-author: loooom
-version: 1.0.0
+metadata:
+  author: loooom
+  version: "1.0.0"
 ---
 
 # Socratic Thinking

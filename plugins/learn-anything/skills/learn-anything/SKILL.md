@@ -1,8 +1,9 @@
 ---
 name: learn-anything
 description: Benjamin Franklin's autodidact method for mastering any subject
-author: loooom
-version: 1.0.0
+metadata:
+  author: loooom
+  version: "1.0.0"
 ---
 
 # Learn Anything — Franklin's Method

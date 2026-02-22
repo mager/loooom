@@ -1,8 +1,9 @@
 ---
 name: frontend-design
 description: A frontend design agent channeling a specific aesthetic philosophy. Every UI should feel hot, sleek, usable, fun, and addictive.
-author: mager
-version: 1.0.0
+metadata:
+  author: mager
+  version: "1.0.0"
 ---
 
 # Frontend Design

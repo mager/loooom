@@ -1,8 +1,9 @@
 ---
 name: kana-ascii
 description: Render hiragana, katakana, and kanji as ASCII art in the terminal. Backed by the kana-ascii npm package — use the CLI for raw output, this skill for guided learning with stroke order and mnemonics.
-author: mager
-version: 2.0.0
+metadata:
+  author: mager
+  version: "2.0.0"
 ---
 
 # Kana ASCII
