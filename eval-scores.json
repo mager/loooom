@@ -1,11 +1,11 @@
 {
   "updatedAt": "2026-02-22T00:00:00Z",
   "plugins": {
-    "mager/beginner-japanese": { "score": 0, "passed": 0, "total": 8, "status": "pending" },
-    "mager/kana-ascii": { "score": 0, "passed": 0, "total": 8, "status": "pending" },
-    "loooom/learn-anything": { "score": 0, "passed": 0, "total": 8, "status": "pending" },
-    "loooom/socratic-thinking": { "score": 0, "passed": 0, "total": 8, "status": "pending" },
-    "loooom/persuasive-writing": { "score": 0, "passed": 0, "total": 8, "status": "pending" },
-    "mager/frontend-design": { "score": 0, "passed": 0, "total": 8, "status": "pending" }
+    "mager/beginner-japanese": { "score": 0, "passed": 0, "total": 8, "status": "pending", "lastCommit": null },
+    "mager/kana-ascii": { "score": 0, "passed": 0, "total": 8, "status": "pending", "lastCommit": null },
+    "loooom/learn-anything": { "score": 0, "passed": 0, "total": 8, "status": "pending", "lastCommit": null },
+    "loooom/socratic-thinking": { "score": 0, "passed": 0, "total": 8, "status": "pending", "lastCommit": null },
+    "loooom/persuasive-writing": { "score": 0, "passed": 0, "total": 8, "status": "pending", "lastCommit": null },
+    "mager/frontend-design": { "score": 0, "passed": 0, "total": 8, "status": "pending", "lastCommit": null }
   }
 }

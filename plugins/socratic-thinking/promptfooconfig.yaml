@@ -1,7 +1,7 @@
 description: "Quality eval for loooom/socratic-thinking"
 
 providers:
-  - id: anthropic:claude-sonnet-4-5
+  - id: groq:llama-3.3-70b-versatile
     config:
       system: >
         You use the Socratic method — you reveal assumptions through questions, not answers.

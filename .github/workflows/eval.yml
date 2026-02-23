@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "plugins/*/promptfooconfig.yaml"
+      - "plugins/*/skills/**"
   schedule:
     - cron: "0 2 * * *" # nightly 02:00 UTC
   workflow_dispatch:
@@ -17,6 +18,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history needed for git log change detection
 
       - uses: actions/setup-node@v4
         with:
@@ -25,59 +28,93 @@ jobs:
       - name: Install promptfoo
         run: npm install -g promptfoo
 
-      - name: Run evals
+      - name: Run evals (changed plugins only)
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
           mkdir -p /tmp/eval-results
 
-          npx promptfoo eval \
-            --config plugins/beginner-japanese/promptfooconfig.yaml \
-            --output /tmp/eval-results/beginner-japanese.json 2>/dev/null || true
+          node -e "
+          const { execSync } = require('child_process');
+          const fs = require('fs');
 
-          npx promptfoo eval \
-            --config plugins/kana-ascii/promptfooconfig.yaml \
-            --output /tmp/eval-results/kana-ascii.json 2>/dev/null || true
+          const pluginMap = [
+            { slug: 'beginner-japanese', key: 'mager/beginner-japanese' },
+            { slug: 'kana-ascii',        key: 'mager/kana-ascii' },
+            { slug: 'learn-anything',    key: 'loooom/learn-anything' },
+            { slug: 'socratic-thinking', key: 'loooom/socratic-thinking' },
+            { slug: 'persuasive-writing',key: 'loooom/persuasive-writing' },
+            { slug: 'frontend-design',   key: 'mager/frontend-design' },
+          ];
 
-          npx promptfoo eval \
-            --config plugins/learn-anything/promptfooconfig.yaml \
-            --output /tmp/eval-results/learn-anything.json 2>/dev/null || true
+          const scores = JSON.parse(fs.readFileSync('eval-scores.json', 'utf8'));
+          const head = execSync('git rev-parse HEAD').toString().trim();
 
-          npx promptfoo eval \
-            --config plugins/socratic-thinking/promptfooconfig.yaml \
-            --output /tmp/eval-results/socratic-thinking.json 2>/dev/null || true
+          const toRun = pluginMap.filter(({ slug, key }) => {
+            const lastCommit = scores.plugins[key]?.lastCommit;
+            if (!lastCommit) {
+              console.log(\`\${slug}: no prior eval — running\`);
+              return true;
+            }
+            const changes = execSync(\`git log --oneline \${lastCommit}..HEAD -- plugins/\${slug}/\`).toString().trim();
+            if (changes) {
+              console.log(\`\${slug}: changed since \${lastCommit.slice(0,7)} — running\`);
+              return true;
+            }
+            console.log(\`\${slug}: no changes — skipping\`);
+            return false;
+          });
 
-          npx promptfoo eval \
-            --config plugins/persuasive-writing/promptfooconfig.yaml \
-            --output /tmp/eval-results/persuasive-writing.json 2>/dev/null || true
+          fs.writeFileSync('/tmp/to-run.json', JSON.stringify(toRun));
+          fs.writeFileSync('/tmp/head-sha.txt', head);
+          "
 
-          npx promptfoo eval \
-            --config plugins/frontend-design/promptfooconfig.yaml \
-            --output /tmp/eval-results/frontend-design.json 2>/dev/null || true
+          # Run evals for changed plugins only
+          node -e "
+          const { execSync } = require('child_process');
+          const fs = require('fs');
+          const toRun = JSON.parse(fs.readFileSync('/tmp/to-run.json'));
+
+          for (const { slug } of toRun) {
+            console.log(\`\n→ Evaluating \${slug}...\`);
+            try {
+              execSync(
+                \`npx promptfoo eval --config plugins/\${slug}/promptfooconfig.yaml --output /tmp/eval-results/\${slug}.json\`,
+                { stdio: 'inherit' }
+              );
+            } catch {
+              console.log(\`  ⚠ eval failed for \${slug} — keeping previous score\`);
+            }
+          }
+          "
 
       - name: Aggregate scores
         run: |
           node -e "
           const fs = require('fs');
-          const path = require('path');
 
-          const pluginMap = {
-            'beginner-japanese': 'mager/beginner-japanese',
-            'kana-ascii': 'mager/kana-ascii',
-            'learn-anything': 'loooom/learn-anything',
-            'socratic-thinking': 'loooom/socratic-thinking',
-            'persuasive-writing': 'loooom/persuasive-writing',
-            'frontend-design': 'mager/frontend-design',
-          };
+          const pluginMap = [
+            { slug: 'beginner-japanese', key: 'mager/beginner-japanese' },
+            { slug: 'kana-ascii',        key: 'mager/kana-ascii' },
+            { slug: 'learn-anything',    key: 'loooom/learn-anything' },
+            { slug: 'socratic-thinking', key: 'loooom/socratic-thinking' },
+            { slug: 'persuasive-writing',key: 'loooom/persuasive-writing' },
+            { slug: 'frontend-design',   key: 'mager/frontend-design' },
+          ];
 
-          const scores = { updatedAt: new Date().toISOString(), plugins: {} };
+          const toRun = JSON.parse(fs.readFileSync('/tmp/to-run.json'));
+          const head = fs.readFileSync('/tmp/head-sha.txt', 'utf8').trim();
+          const scores = JSON.parse(fs.readFileSync('eval-scores.json', 'utf8'));
+          const ranSlugs = new Set(toRun.map(p => p.slug));
 
-          for (const [slug, key] of Object.entries(pluginMap)) {
+          scores.updatedAt = new Date().toISOString();
+
+          for (const { slug, key } of pluginMap) {
+            if (!ranSlugs.has(slug)) continue; // didn't run — preserve existing score
+
             const file = \`/tmp/eval-results/\${slug}.json\`;
-            if (!fs.existsSync(file)) {
-              scores.plugins[key] = { score: 0, passed: 0, total: 8, status: 'pending' };
-              continue;
-            }
+            if (!fs.existsSync(file)) continue; // eval failed — preserve existing score
+
             try {
               const data = JSON.parse(fs.readFileSync(file, 'utf8'));
               const results = data.results?.results || [];
@@ -88,15 +125,16 @@ jobs:
                 score,
                 passed,
                 total,
-                status: score >= 80 ? 'passing' : score === 0 ? 'pending' : 'failing',
+                status: score >= 80 ? 'passing' : score === 0 && total === 0 ? 'pending' : 'failing',
+                lastCommit: head,
               };
             } catch {
-              scores.plugins[key] = { score: 0, passed: 0, total: 8, status: 'pending' };
+              console.log(\`Failed to parse results for \${slug}\`);
             }
           }
 
           fs.writeFileSync('eval-scores.json', JSON.stringify(scores, null, 2));
-          console.log('Scores written:', JSON.stringify(scores, null, 2));
+          console.log(JSON.stringify(scores, null, 2));
           "
 
       - name: Commit scores

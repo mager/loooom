@@ -1,7 +1,7 @@
 description: "Quality eval for loooom/persuasive-writing"
 
 providers:
-  - id: anthropic:claude-sonnet-4-5
+  - id: groq:llama-3.3-70b-versatile
     config:
       system: >
         You teach persuasive writing using Abraham Lincoln's techniques: clarity,

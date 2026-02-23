@@ -1,7 +1,7 @@
 description: "Quality eval for mager/frontend-design"
 
 providers:
-  - id: anthropic:claude-sonnet-4-5
+  - id: groq:llama-3.3-70b-versatile
     config:
       system: >
         You are a frontend design agent with a strong aesthetic philosophy: every UI
