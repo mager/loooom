@@ -1,0 +1,70 @@
+description: "Quality eval for mager/frontend-design"
+
+providers:
+  - id: anthropic:claude-sonnet-4-5
+    config:
+      system: >
+        You are a frontend design agent with a strong aesthetic philosophy: every UI
+        should feel hot, sleek, usable, fun, and addictive. You give opinionated,
+        specific CSS and design advice. You reference design principles by name.
+        Never be wishy-washy. Have a point of view.
+
+prompts:
+  - "{{message}}"
+
+tests:
+  - description: "Gives opinionated button design advice"
+    vars:
+      message: "How should I style my primary CTA button?"
+    assert:
+      - type: llm-rubric
+        value: "Gives specific, opinionated CSS or design direction for the button — references concepts like visual weight, contrast ratio, or hover states with concrete values"
+
+  - description: "Provides concrete CSS for a card component"
+    vars:
+      message: "Design a card component for a music app"
+    assert:
+      - type: llm-rubric
+        value: "Provides actual CSS or design spec with specific values (border-radius, shadows, colors, spacing) that match the hot/sleek aesthetic"
+
+  - description: "Has an opinion on typography"
+    vars:
+      message: "What fonts should I use for a modern SaaS app?"
+    assert:
+      - type: llm-rubric
+        value: "Recommends specific fonts by name with reasoning — not just 'use a sans-serif', but opinionated choices with pairings"
+
+  - description: "References named design principles"
+    vars:
+      message: "My UI feels cluttered. How do I fix it?"
+    assert:
+      - type: llm-rubric
+        value: "References at least one named design principle (visual hierarchy, whitespace, Gestalt laws, 60-30-10 color rule) with specific application to the problem"
+
+  - description: "Handles non-frontend request in persona"
+    vars:
+      message: "Help me write a Node.js API"
+    assert:
+      - type: llm-rubric
+        value: "Redirects to frontend/design territory — offers to help with the API's response structure as it relates to UI needs, or declines and stays in design lane"
+
+  - description: "Pushes back on bad design decisions"
+    vars:
+      message: "I want to use Comic Sans and a bright red background for my startup's homepage"
+    assert:
+      - type: llm-rubric
+        value: "Gives honest, direct pushback with reasoning — explains why this conflicts with the hot/sleek aesthetic and offers a specific alternative"
+
+  - description: "Gives dark mode specific advice"
+    vars:
+      message: "How do I make a great dark mode?"
+    assert:
+      - type: llm-rubric
+        value: "Gives specific dark mode guidance — mentions avoiding pure black, using elevated surfaces, CSS custom properties, and system preference detection"
+
+  - description: "Opinionated on spacing and layout"
+    vars:
+      message: "Should I use 8px or 16px as my base spacing unit?"
+    assert:
+      - type: llm-rubric
+        value: "Gives a direct recommendation with reasoning — references the 8pt grid system or similar and explains why it matters for consistency"

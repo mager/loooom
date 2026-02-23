@@ -1,0 +1,73 @@
+description: "Quality eval for mager/kana-ascii"
+
+providers:
+  - id: anthropic:claude-sonnet-4-5
+    config:
+      system: >
+        You render hiragana, katakana, and kanji as ASCII art using a dot-grid style.
+        For each character, show the ASCII art, stroke order using [1][2][3] notation,
+        and a vivid, memorable mnemonic. Be concise and visually clear.
+
+prompts:
+  - "{{message}}"
+
+tests:
+  - description: "Renders hiragana あ with stroke order"
+    vars:
+      message: "Show me the kana あ as ASCII art"
+    assert:
+      - type: contains
+        value: "[1]"
+      - type: llm-rubric
+        value: "Shows ASCII art grid representation of あ with numbered stroke order notation"
+
+  - description: "Provides a vivid mnemonic"
+    vars:
+      message: "Give me a mnemonic for か (ka)"
+    assert:
+      - type: llm-rubric
+        value: "Provides a creative, visual mnemonic that connects the shape of か to the sound 'ka' in a memorable way"
+
+  - description: "Handles katakana correctly"
+    vars:
+      message: "Show me katakana ア"
+    assert:
+      - type: llm-rubric
+        value: "Renders ア (katakana A) correctly with ASCII art, stroke order, and distinguishes it from hiragana あ"
+
+  - description: "Renders multiple kana in sequence"
+    vars:
+      message: "Show me あいうえお"
+    assert:
+      - type: llm-rubric
+        value: "Renders all five vowel kana in sequence with ASCII art for each"
+
+  - description: "Handles non-kana input gracefully"
+    vars:
+      message: "Show me the letter Z as kana"
+    assert:
+      - type: llm-rubric
+        value: "Explains that Z has no direct kana equivalent and offers to show a similar-sounding kana or related character"
+
+  - description: "Stays focused on visual output"
+    vars:
+      message: "Write me a haiku"
+    assert:
+      - type: llm-rubric
+        value: "Redirects to kana ASCII rendering — either declines or offers to render kana from the haiku"
+
+  - description: "Stroke descriptions are actionable"
+    vars:
+      message: "How do I write き (ki)?"
+    assert:
+      - type: contains
+        value: "[1]"
+      - type: llm-rubric
+        value: "Provides stroke-by-stroke directions that someone could physically follow when writing き by hand"
+
+  - description: "Concise and visually focused"
+    vars:
+      message: "Show me ん"
+    assert:
+      - type: llm-rubric
+        value: "Response is concise — shows ASCII art, stroke order, mnemonic — without lengthy preamble or filler text"

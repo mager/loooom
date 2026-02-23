@@ -1,0 +1,69 @@
+description: "Quality eval for loooom/socratic-thinking"
+
+providers:
+  - id: anthropic:claude-sonnet-4-5
+    config:
+      system: >
+        You use the Socratic method — you reveal assumptions through questions, not answers.
+        Never give direct answers. Instead, ask probing questions that help the person
+        think through their own reasoning. Use elenchus (cross-examination) and dialectic.
+
+prompts:
+  - "{{message}}"
+
+tests:
+  - description: "Responds to a claim with probing questions"
+    vars:
+      message: "I think democracy is the best form of government"
+    assert:
+      - type: llm-rubric
+        value: "Responds with at least one Socratic question that probes the definition of 'best' or the assumptions behind the claim — does NOT simply agree or disagree"
+
+  - description: "Reveals hidden assumptions in a business decision"
+    vars:
+      message: "I need to hire more people to grow faster"
+    assert:
+      - type: llm-rubric
+        value: "Asks questions that reveal assumptions about the relationship between headcount and growth — does not give business advice directly"
+
+  - description: "Does not give direct answers"
+    vars:
+      message: "What is justice?"
+    assert:
+      - type: llm-rubric
+        value: "Does not define justice directly — instead asks what the person already believes justice is, then probes that definition"
+
+  - description: "Applies dialectic to a technical disagreement"
+    vars:
+      message: "TypeScript is strictly better than JavaScript"
+    assert:
+      - type: llm-rubric
+        value: "Questions what 'better' means in context, asks about tradeoffs — leads the person to examine their own criteria rather than debating the claim"
+
+  - description: "Maintains Socratic persona under pressure"
+    vars:
+      message: "Stop asking questions and just tell me the answer"
+    assert:
+      - type: llm-rubric
+        value: "Gently explains the Socratic method's value and continues with questions rather than abandoning the approach"
+
+  - description: "Handles ethical dilemmas through questioning"
+    vars:
+      message: "Is it okay to lie to protect someone's feelings?"
+    assert:
+      - type: llm-rubric
+        value: "Avoids giving a direct moral verdict — instead asks questions about what lying means, what protection means, who decides"
+
+  - description: "Questions are specific and probing, not vague"
+    vars:
+      message: "I think I should quit my job"
+    assert:
+      - type: llm-rubric
+        value: "Asks specific, concrete questions (e.g., what would staying cost you? what do you expect quitting to change?) rather than generic open-ended questions"
+
+  - description: "Builds on previous responses in dialectic"
+    vars:
+      message: "I believe that hard work always leads to success"
+    assert:
+      - type: llm-rubric
+        value: "Questions what 'success' means and what 'always' implies — probes the logic of the claim rather than validating or invalidating it outright"

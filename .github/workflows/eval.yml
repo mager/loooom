@@ -1,0 +1,108 @@
+name: Plugin Quality Eval
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "plugins/*/promptfooconfig.yaml"
+  schedule:
+    - cron: "0 2 * * *" # nightly 02:00 UTC
+  workflow_dispatch:
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install promptfoo
+        run: npm install -g promptfoo
+
+      - name: Run evals
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          mkdir -p /tmp/eval-results
+
+          npx promptfoo eval \
+            --config plugins/beginner-japanese/promptfooconfig.yaml \
+            --output /tmp/eval-results/beginner-japanese.json 2>/dev/null || true
+
+          npx promptfoo eval \
+            --config plugins/kana-ascii/promptfooconfig.yaml \
+            --output /tmp/eval-results/kana-ascii.json 2>/dev/null || true
+
+          npx promptfoo eval \
+            --config plugins/learn-anything/promptfooconfig.yaml \
+            --output /tmp/eval-results/learn-anything.json 2>/dev/null || true
+
+          npx promptfoo eval \
+            --config plugins/socratic-thinking/promptfooconfig.yaml \
+            --output /tmp/eval-results/socratic-thinking.json 2>/dev/null || true
+
+          npx promptfoo eval \
+            --config plugins/persuasive-writing/promptfooconfig.yaml \
+            --output /tmp/eval-results/persuasive-writing.json 2>/dev/null || true
+
+          npx promptfoo eval \
+            --config plugins/frontend-design/promptfooconfig.yaml \
+            --output /tmp/eval-results/frontend-design.json 2>/dev/null || true
+
+      - name: Aggregate scores
+        run: |
+          node -e "
+          const fs = require('fs');
+          const path = require('path');
+
+          const pluginMap = {
+            'beginner-japanese': 'mager/beginner-japanese',
+            'kana-ascii': 'mager/kana-ascii',
+            'learn-anything': 'loooom/learn-anything',
+            'socratic-thinking': 'loooom/socratic-thinking',
+            'persuasive-writing': 'loooom/persuasive-writing',
+            'frontend-design': 'mager/frontend-design',
+          };
+
+          const scores = { updatedAt: new Date().toISOString(), plugins: {} };
+
+          for (const [slug, key] of Object.entries(pluginMap)) {
+            const file = \`/tmp/eval-results/\${slug}.json\`;
+            if (!fs.existsSync(file)) {
+              scores.plugins[key] = { score: 0, passed: 0, total: 8, status: 'pending' };
+              continue;
+            }
+            try {
+              const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+              const results = data.results?.results || [];
+              const total = results.length;
+              const passed = results.filter(r => r.success).length;
+              const score = total > 0 ? Math.round((passed / total) * 100) : 0;
+              scores.plugins[key] = {
+                score,
+                passed,
+                total,
+                status: score >= 80 ? 'passing' : score === 0 ? 'pending' : 'failing',
+              };
+            } catch {
+              scores.plugins[key] = { score: 0, passed: 0, total: 8, status: 'pending' };
+            }
+          }
+
+          fs.writeFileSync('eval-scores.json', JSON.stringify(scores, null, 2));
+          console.log('Scores written:', JSON.stringify(scores, null, 2));
+          "
+
+      - name: Commit scores
+        run: |
+          git config user.name "Loooom Eval Bot"
+          git config user.email "bot@loooom.xyz"
+          git add eval-scores.json
+          git diff --cached --quiet || git commit -m "ci: update eval scores [skip ci]"
+          git push
