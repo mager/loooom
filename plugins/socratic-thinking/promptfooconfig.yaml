@@ -1,12 +1,12 @@
 description: "Quality eval for loooom/socratic-thinking"
 
 providers:
-  - id: anthropic:claude-3-5-haiku-20241022
+  - id: groq:llama-3.3-70b-versatile
     config:
       system: file://./skills/socratic-thinking/SKILL.md
 
 evaluateOptions:
-  rubricProvider: anthropic:claude-3-5-haiku-20241022
+  rubricProvider: groq:llama-3.3-70b-versatile
 
 
 prompts:
