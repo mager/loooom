@@ -30,7 +30,7 @@ jobs:
 
       - name: Run evals (changed plugins only)
         env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           mkdir -p /tmp/eval-results
 

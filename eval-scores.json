@@ -6,42 +6,42 @@
       "passed": 0,
       "total": 13,
       "status": "failing",
-      "lastCommit": "6d8d779f01bc07e951087c82728b2bec657354d4"
+      "lastCommit": null
     },
     "mager/kana-ascii": {
       "score": 0,
       "passed": 0,
       "total": 8,
       "status": "failing",
-      "lastCommit": "6d8d779f01bc07e951087c82728b2bec657354d4"
+      "lastCommit": null
     },
     "loooom/learn-anything": {
       "score": 0,
       "passed": 0,
       "total": 8,
       "status": "failing",
-      "lastCommit": "6d8d779f01bc07e951087c82728b2bec657354d4"
+      "lastCommit": null
     },
     "loooom/socratic-thinking": {
       "score": 0,
       "passed": 0,
       "total": 8,
       "status": "failing",
-      "lastCommit": "6d8d779f01bc07e951087c82728b2bec657354d4"
+      "lastCommit": null
     },
     "loooom/persuasive-writing": {
       "score": 0,
       "passed": 0,
       "total": 8,
       "status": "failing",
-      "lastCommit": "6d8d779f01bc07e951087c82728b2bec657354d4"
+      "lastCommit": null
     },
     "mager/frontend-design": {
       "score": 0,
       "passed": 0,
       "total": 8,
       "status": "failing",
-      "lastCommit": "6d8d779f01bc07e951087c82728b2bec657354d4"
+      "lastCommit": null
     }
   }
 }
