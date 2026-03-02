@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-03-01T03:09:09.596Z",
+  "updatedAt": "2026-03-02T00:47:13.015Z",
   "plugins": {
     "mager/beginner-japanese": {
       "score": 0,
       "passed": 0,
-      "total": 8,
+      "total": 13,
       "status": "failing",
-      "lastCommit": "a63bb6af900f6794e9b01a41873588883657a8f9"
+      "lastCommit": "69a7ab9021db200ff00f52592c6ccf449c65d75c"
     },
     "mager/kana-ascii": {
       "score": 0,
