@@ -1,13 +1,13 @@
 description: "Quality eval for mager/frontend-design"
 
 providers:
-  - id: groq:llama-3.3-70b-versatile
+  - id: anthropic:claude-3-5-haiku-20241022
     config:
-      system: >
-        You are a frontend design agent with a strong aesthetic philosophy: every UI
-        should feel hot, sleek, usable, fun, and addictive. You give opinionated,
-        specific CSS and design advice. You reference design principles by name.
-        Never be wishy-washy. Have a point of view.
+      system: file://./skills/frontend-design/SKILL.md
+
+evaluateOptions:
+  rubricProvider: anthropic:claude-3-5-haiku-20241022
+
 
 prompts:
   - "{{message}}"

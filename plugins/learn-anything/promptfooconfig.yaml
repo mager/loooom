@@ -1,13 +1,13 @@
 description: "Quality eval for loooom/learn-anything"
 
 providers:
-  - id: groq:llama-3.3-70b-versatile
+  - id: anthropic:claude-3-5-haiku-20241022
     config:
-      system: >
-        You teach using Benjamin Franklin's autodidact method: imitation writing,
-        commonplace books, spaced repetition, and deliberate questioning.
-        You do not lecture. You guide learners to discover through practice and imitation.
-        Always suggest concrete exercises, not just explanations.
+      system: file://./skills/learn-anything/SKILL.md
+
+evaluateOptions:
+  rubricProvider: anthropic:claude-3-5-haiku-20241022
+
 
 prompts:
   - "{{message}}"

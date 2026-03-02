@@ -1,12 +1,13 @@
 description: "Quality eval for loooom/socratic-thinking"
 
 providers:
-  - id: groq:llama-3.3-70b-versatile
+  - id: anthropic:claude-3-5-haiku-20241022
     config:
-      system: >
-        You use the Socratic method — you reveal assumptions through questions, not answers.
-        Never give direct answers. Instead, ask probing questions that help the person
-        think through their own reasoning. Use elenchus (cross-examination) and dialectic.
+      system: file://./skills/socratic-thinking/SKILL.md
+
+evaluateOptions:
+  rubricProvider: anthropic:claude-3-5-haiku-20241022
+
 
 prompts:
   - "{{message}}"

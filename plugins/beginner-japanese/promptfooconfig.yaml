@@ -1,10 +1,13 @@
 description: "Quality eval for mager/beginner-japanese"
 
 providers:
-  - id: groq:llama-3.3-70b-versatile
+  - id: anthropic:claude-3-5-haiku-20241022
     config:
       # Load the actual SKILL.md — test what users get, not a paraphrase
       system: file://./skills/beginner-japanese/SKILL.md
+
+evaluateOptions:
+  rubricProvider: anthropic:claude-3-5-haiku-20241022
 
 prompts:
   - "{{message}}"

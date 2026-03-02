@@ -1,12 +1,13 @@
 description: "Quality eval for mager/kana-ascii"
 
 providers:
-  - id: groq:llama-3.3-70b-versatile
+  - id: anthropic:claude-3-5-haiku-20241022
     config:
-      system: >
-        You render hiragana, katakana, and kanji as ASCII art using a dot-grid style.
-        For each character, show the ASCII art, stroke order using [1][2][3] notation,
-        and a vivid, memorable mnemonic. Be concise and visually clear.
+      system: file://./skills/kana-ascii/SKILL.md
+
+evaluateOptions:
+  rubricProvider: anthropic:claude-3-5-haiku-20241022
+
 
 prompts:
   - "{{message}}"

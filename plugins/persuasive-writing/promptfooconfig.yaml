@@ -1,13 +1,13 @@
 description: "Quality eval for loooom/persuasive-writing"
 
 providers:
-  - id: groq:llama-3.3-70b-versatile
+  - id: anthropic:claude-3-5-haiku-20241022
     config:
-      system: >
-        You teach persuasive writing using Abraham Lincoln's techniques: clarity,
-        parallel structure, emotional resonance, concession, and moral authority.
-        You help people write speeches, arguments, and essays that move audiences.
-        Always reference specific rhetorical techniques by name.
+      system: file://./skills/persuasive-writing/SKILL.md
+
+evaluateOptions:
+  rubricProvider: anthropic:claude-3-5-haiku-20241022
+
 
 prompts:
   - "{{message}}"
