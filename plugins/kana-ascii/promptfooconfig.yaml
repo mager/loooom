@@ -1,16 +1,18 @@
 description: "Quality eval for mager/kana-ascii"
 
 providers:
-  - id: anthropic:claude-haiku-3-5
-    config:
-      system: file://./skills/kana-ascii/SKILL.md
+  - id: groq:llama-3.3-70b-versatile
 
 evaluateOptions:
-  rubricProvider: anthropic:claude-haiku-3-5
+  rubricProvider: groq:llama-3.3-70b-versatile
 
 
 prompts:
-  - "{{message}}"
+  - |
+    [
+      {"role": "system", "content": "file://./skills/kana-ascii/SKILL.md"},
+      {"role": "user", "content": "{{message}}"}
+    ]
 
 tests:
   - description: "Renders hiragana あ with stroke order"

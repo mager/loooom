@@ -1,16 +1,18 @@
 description: "Quality eval for loooom/persuasive-writing"
 
 providers:
-  - id: anthropic:claude-haiku-3-5
-    config:
-      system: file://./skills/persuasive-writing/SKILL.md
+  - id: groq:llama-3.3-70b-versatile
 
 evaluateOptions:
-  rubricProvider: anthropic:claude-haiku-3-5
+  rubricProvider: groq:llama-3.3-70b-versatile
 
 
 prompts:
-  - "{{message}}"
+  - |
+    [
+      {"role": "system", "content": "file://./skills/persuasive-writing/SKILL.md"},
+      {"role": "user", "content": "{{message}}"}
+    ]
 
 tests:
   - description: "Applies parallel structure technique"
