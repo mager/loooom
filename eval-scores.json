@@ -1,47 +1,47 @@
 {
-  "updatedAt": "2026-03-03T11:35:16.157Z",
+  "updatedAt": "2026-03-03T11:41:31.874Z",
   "plugins": {
     "mager/beginner-japanese": {
-      "score": 0,
-      "passed": 0,
+      "score": 31,
+      "passed": 4,
       "total": 13,
       "status": "failing",
-      "lastCommit": null
+      "lastCommit": "676de915461bedfb616301e0a80280df70eca2b0"
     },
     "mager/kana-ascii": {
-      "score": 0,
-      "passed": 0,
+      "score": 13,
+      "passed": 1,
       "total": 8,
       "status": "failing",
-      "lastCommit": null
+      "lastCommit": "676de915461bedfb616301e0a80280df70eca2b0"
     },
     "loooom/learn-anything": {
-      "score": 0,
-      "passed": 0,
+      "score": 13,
+      "passed": 1,
       "total": 8,
       "status": "failing",
-      "lastCommit": null
+      "lastCommit": "676de915461bedfb616301e0a80280df70eca2b0"
     },
     "loooom/socratic-thinking": {
-      "score": 0,
-      "passed": 0,
+      "score": 25,
+      "passed": 2,
       "total": 8,
       "status": "failing",
-      "lastCommit": null
+      "lastCommit": "676de915461bedfb616301e0a80280df70eca2b0"
     },
     "loooom/persuasive-writing": {
-      "score": 0,
-      "passed": 0,
+      "score": 13,
+      "passed": 1,
       "total": 8,
       "status": "failing",
-      "lastCommit": null
+      "lastCommit": "676de915461bedfb616301e0a80280df70eca2b0"
     },
     "mager/frontend-design": {
-      "score": 0,
-      "passed": 0,
+      "score": 13,
+      "passed": 1,
       "total": 8,
       "status": "failing",
-      "lastCommit": null
+      "lastCommit": "676de915461bedfb616301e0a80280df70eca2b0"
     }
   }
 }
