@@ -1,9 +1,8 @@
 ---
 name: beginner-japanese
-description: Learn conversational Japanese for traveling in Japan. Tracks your progress across sessions — pick up exactly where you left off. Supports local file or mem0 cloud memory.
-metadata:
-  author: mager
-  version: "2.1.0"
+description: Learn conversational Japanese for traveling in Japan. Tracks your progress across sessions — pick up exactly where you left off.
+author: mager
+version: 2.2.0
 ---
 
 # Learn Beginner Japanese
@@ -12,39 +11,17 @@ A conversational Japanese tutor for anyone visiting Japan. Practice with your AI
 
 **This skill saves your progress.** Every session ends with a checkpoint. Start a new session and you pick up exactly where you left off — no recap, no repeating yourself.
 
-Two memory modes — use whichever fits your setup:
-- **Local file** (default, zero deps): `.claude/japanese-progress.md`
-- **mem0 cloud** (optional, cross-device): works from any machine, including your phone in Japan
-
 ---
 
 ## Session Start Protocol
 
-**Step 1: Detect memory mode**
+**Step 1: Check for existing progress**
 
-Check if mem0 is configured:
-```bash
-echo $MEM0_API_KEY
-```
-
-**If MEM0_API_KEY is set → use mem0:**
-```bash
-curl -sL -X POST https://api.mem0.ai/v1/memories/search/ \
-  -H "Authorization: Token $MEM0_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"query": "japanese learning progress kana vocab session", "user_id": "japanese-learner"}'
-```
-
-Read the returned memories and resume from that context.
-
-**If no MEM0_API_KEY → use local file:**
-```bash
-cat .claude/japanese-progress.md
-```
+Read `.claude/japanese-progress.md` if it exists.
 
 **Step 2: Resume or onboard**
 
-If memories/file **exist** — read them, then open with:
+If progress file **exists** — read it, then open with:
 > "Welcome back! Last time you covered [X]. Today we're picking up with [Y]. Ready?"
 
 If **nothing exists** — this is session 1. Ask:
@@ -59,24 +36,6 @@ Then teach the first survival phrase: **すみません (sumimasen)** and start 
 ## Session End Protocol
 
 **When the user wraps up or ends the lesson:**
-
-**If MEM0_API_KEY is set → add to mem0:**
-```bash
-curl -sL -X POST https://api.mem0.ai/v1/memories/ \
-  -H "Authorization: Token $MEM0_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "messages": [
-      {"role": "user", "content": "Ending my Japanese lesson for today."},
-      {"role": "assistant", "content": "Session summary: [kana covered + confidence, phrases learned, next session goals]"}
-    ],
-    "user_id": "japanese-learner"
-  }'
-```
-
-mem0 automatically extracts and stores what matters. Next session it retrieves it semantically.
-
-**If no MEM0_API_KEY → write local file:**
 
 Write to `.claude/japanese-progress.md`:
 
@@ -110,24 +69,7 @@ Write to `.claude/japanese-progress.md`:
 [Learning style, goals, what landed, struggles]
 ```
 
-Either way, tell the user: *"Progress saved — next session we pick up right here."*
-If mem0: *"Saved to mem0 — works from any device, including your phone in Japan."*
-
----
-
-## mem0 Setup (optional, 2 minutes)
-
-mem0's free tier: 10,000 memories, 1,000 retrieval calls/month. A 2-month Japanese journey won't get close to either limit.
-
-1. Sign up at [app.mem0.ai](https://app.mem0.ai)
-2. Grab your API key from the dashboard
-3. Add to your shell:
-   ```bash
-   export MEM0_API_KEY=your-key-here
-   ```
-   Or add to `~/.zshrc` / `~/.bashrc` to persist across sessions.
-
-Once set, the skill automatically switches to cloud mode. Your progress syncs across every device where you've set `MEM0_API_KEY` — laptop at home, phone in Japan, anywhere.
+Tell the user: *"Progress saved to `.claude/japanese-progress.md` — next session we pick up right here."*
 
 ---
 
@@ -135,6 +77,18 @@ Once set, the skill automatically switches to cloud mode. Your progress syncs ac
 
 ### Module 1: Kana Foundations
 **Goal:** Read and write hiragana vowel row + katakana vowel row from memory.
+
+**Japanese vowel pronunciation** — 5 pure vowels, always consistent (unlike English):
+
+| Kana | Romaji | Sounds like | Example |
+|------|--------|-------------|---------|
+| あ / ア | a | "ah" (father) | ありがとう |
+| い / イ | i | "ee" (feet) | いち |
+| う / ウ | u | "oo" (but short, no lip rounding) | うどん |
+| え / エ | e | "eh" (bed) | えき (station) |
+| お / オ | o | "oh" (go) | おいしい |
+
+Key rule: **vowels never change sound** based on surrounding letters. What you see is what you say.
 
 Teach using the `kana-ascii` companion:
 ```bash
@@ -162,11 +116,42 @@ Milestone: write your name in hiragana from memory.
 | お会計お願いします | Okaikei onegaishimasu | Check please |
 | 美味しい！ | Oishii! | Delicious! |
 | ＿＿はどこですか？ | __ wa doko desu ka? | Where is __? |
+| 駅はどこですか？ | Eki wa doko desu ka? | Where is the train station? |
 | いくらですか？ | Ikura desu ka? | How much? |
 | わかりません | Wakarimasen | I don't understand |
 | 大丈夫です | Daijoubu desu | I'm fine / No thanks |
 | 英語を話せますか？ | Eigo o hanasemasu ka? | Do you speak English? |
 | 日本語が少しだけ | Nihongo ga sukoshi dake | Just a little Japanese |
+| 予約しています | Yoyaku shite imasu | I have a reservation (hotel/restaurant) |
+| チェックインをお願いします | Chekkuin o onegaishimasu | Check-in please |
+| 袋はいりません | Fukuro wa irimasen | No bag needed (コンビニ) |
+| レシートをください | Reshiito o kudasai | Receipt please |
+
+**Emergency phrases — memorize these first:**
+
+| Japanese | Romaji | Use |
+|----------|--------|-----|
+| 助けて！ | Tasukete! | Help me! (urgent) |
+| 警察を呼んでください | Keisatsu o yonde kudasai | Please call the police |
+| 救急車を呼んでください | Kyuukyuusha o yonde kudasai | Please call an ambulance |
+| 病院はどこですか？ | Byouin wa doko desu ka? | Where is the hospital? |
+
+**Numbers 1–10** (essential for prices, floors, quantities):
+
+| Number | Kanji | Hiragana | Romaji |
+|--------|-------|----------|--------|
+| 1 | 一 | いち | ichi |
+| 2 | 二 | に | ni |
+| 3 | 三 | さん | san |
+| 4 | 四 | し/よん | shi / yon |
+| 5 | 五 | ご | go |
+| 6 | 六 | ろく | roku |
+| 7 | 七 | しち/なな | shichi / nana |
+| 8 | 八 | はち | hachi |
+| 9 | 九 | く/きゅう | ku / kyuu |
+| 10 | 十 | じゅう | juu |
+
+Note: Japanese uses different **counter words** depending on what you're counting (flat things, long things, people, etc.) — teach these in context, not as a grammar wall.
 
 ### Module 3: Grammar Blocks
 **Goal:** Build real sentences using particles.
