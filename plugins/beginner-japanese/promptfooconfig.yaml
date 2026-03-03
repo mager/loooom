@@ -1,14 +1,13 @@
 description: "Quality eval for mager/beginner-japanese"
 
 providers:
-  - id: anthropic:claude-haiku-3-5
+  - id: groq:llama-3.3-70b-versatile
 
 prompts:
-  - |
-    [
-      {"role": "system", "content": "file://./skills/beginner-japanese/SKILL.md"},
-      {"role": "user", "content": "{{message}}"}
-    ]
+  - file://./prompt.cjs
+
+evaluateOptions:
+  rubricProvider: groq:llama-3.3-70b-versatile
 
 tests:
   - description: "Opens with level check, not a lecture"

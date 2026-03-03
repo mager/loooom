@@ -80,7 +80,7 @@ jobs:
             console.log(\`\n→ Evaluating \${slug}...\`);
             try {
               execSync(
-                \`npx promptfoo eval --config plugins/\${slug}/promptfooconfig.yaml --output /tmp/eval-results/\${slug}.json --grader anthropic:claude-haiku-3-5\`,
+                \`npx promptfoo eval --config plugins/\${slug}/promptfooconfig.yaml --output /tmp/eval-results/\${slug}.json --grader groq:llama-3.3-70b-versatile\`,
                 { stdio: 'inherit' }
               );
             } catch {

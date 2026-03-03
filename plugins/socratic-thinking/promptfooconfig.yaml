@@ -1,18 +1,14 @@
 description: "Quality eval for loooom/socratic-thinking"
 
 providers:
-  - id: anthropic:claude-haiku-3-5
+  - id: groq:llama-3.3-70b-versatile
 
 evaluateOptions:
-  rubricProvider: anthropic:claude-haiku-3-5
+  rubricProvider: groq:llama-3.3-70b-versatile
 
 
 prompts:
-  - |
-    [
-      {"role": "system", "content": "file://./skills/socratic-thinking/SKILL.md"},
-      {"role": "user", "content": "{{message}}"}
-    ]
+  - file://./prompt.cjs
 
 tests:
   - description: "Responds to a claim with probing questions"
