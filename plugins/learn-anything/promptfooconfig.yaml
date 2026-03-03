@@ -1,10 +1,10 @@
 description: "Quality eval for loooom/learn-anything"
 
 providers:
-  - id: groq:llama-3.3-70b-versatile
+  - id: anthropic:claude-haiku-3-5
 
 evaluateOptions:
-  rubricProvider: groq:llama-3.3-70b-versatile
+  rubricProvider: anthropic:claude-haiku-3-5
 
 
 prompts:
