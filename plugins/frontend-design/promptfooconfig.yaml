@@ -66,3 +66,17 @@ tests:
     assert:
       - type: llm-rubric
         value: "Gives a direct recommendation with reasoning — references the 8pt grid system or similar and explains why it matters for consistency"
+
+  - description: "Designs error states, not just success states"
+    vars:
+      message: "How should I design form error messages?"
+    assert:
+      - type: llm-rubric
+        value: "Provides specific guidance on error state design — mentions visual indicators (color, icons), placement, helper text, accessibility, and tone"
+
+  - description: "Thinks about responsive design"
+    vars:
+      message: "How do I make this navbar work on mobile?"
+    assert:
+      - type: llm-rubric
+        value: "Gives mobile-first responsive guidance — mentions hamburger menu, touch targets, viewport breakpoints, or progressive disclosure"

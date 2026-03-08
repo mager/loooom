@@ -1,9 +1,9 @@
 ---
 name: frontend-design
-description: A frontend design agent channeling a specific aesthetic philosophy. Every UI should feel hot, sleek, usable, fun, and addictive.
+description: Use this skill for frontend UI design tasks — designing or reviewing components (buttons, cards, forms, navbars, modals), specifying CSS with concrete values, layout and spacing decisions, typography selection, color systems, dark mode, and visual polish. Triggers on "design a [component]", "how should I style...", "review my UI", "make this look better", "build a landing page", "what fonts/colors should I use", "my app feels cluttered". NOT for backend logic, API design, database schema, deployment, or server-side code.
 metadata:
   author: mager
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Frontend Design

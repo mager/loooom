@@ -1,0 +1,122 @@
+[
+  {
+    "query": "Design a card component for a music app",
+    "should_trigger": true,
+    "note": "core use case — UI component design"
+  },
+  {
+    "query": "How should I style my primary CTA button?",
+    "should_trigger": true,
+    "note": "styling decisions"
+  },
+  {
+    "query": "What fonts should I use for a modern SaaS app?",
+    "should_trigger": true,
+    "note": "typography choices"
+  },
+  {
+    "query": "My UI feels cluttered. How do I fix it?",
+    "should_trigger": true,
+    "note": "design review / critique"
+  },
+  {
+    "query": "Build me a landing page hero section",
+    "should_trigger": true,
+    "note": "UI construction"
+  },
+  {
+    "query": "Review my CSS for this navbar component",
+    "should_trigger": true,
+    "note": "CSS review"
+  },
+  {
+    "query": "How do I implement a great dark mode?",
+    "should_trigger": true,
+    "note": "dark mode design"
+  },
+  {
+    "query": "What's the best spacing system for a dashboard?",
+    "should_trigger": true,
+    "note": "layout/spacing"
+  },
+  {
+    "query": "Design a login form with validation states",
+    "should_trigger": true,
+    "note": "form design"
+  },
+  {
+    "query": "Make my app look more modern and polished",
+    "should_trigger": true,
+    "note": "general UI polish"
+  },
+  {
+    "query": "Design a color palette for a fintech product",
+    "should_trigger": true,
+    "note": "color system"
+  },
+  {
+    "query": "What animations should I add to my SvelteKit app?",
+    "should_trigger": true,
+    "note": "motion design"
+  },
+  {
+    "query": "How should I handle empty states in my dashboard?",
+    "should_trigger": true,
+    "note": "edge case UI design"
+  },
+  {
+    "query": "I want to redesign my homepage, where do I start?",
+    "should_trigger": true,
+    "note": "design direction"
+  },
+  {
+    "query": "Should I use 8px or 16px as my base spacing unit?",
+    "should_trigger": true,
+    "note": "spacing philosophy"
+  },
+  {
+    "query": "Help me write a Node.js REST API",
+    "should_trigger": false,
+    "note": "backend — no design intent"
+  },
+  {
+    "query": "Fix this Python bug in my data pipeline",
+    "should_trigger": false,
+    "note": "debugging — unrelated domain"
+  },
+  {
+    "query": "Set up a PostgreSQL database schema for users",
+    "should_trigger": false,
+    "note": "database — no UI"
+  },
+  {
+    "query": "Write unit tests for my authentication service",
+    "should_trigger": false,
+    "note": "testing infrastructure"
+  },
+  {
+    "query": "Optimize this SQL query for better performance",
+    "should_trigger": false,
+    "note": "database performance"
+  },
+  {
+    "query": "Help me deploy this app to Vercel",
+    "should_trigger": false,
+    "note": "devops / deployment"
+  },
+  {
+    "query": "Debug this TypeScript type error",
+    "should_trigger": false,
+    "note": "type system debugging"
+  },
+  {
+    "query": "How do I implement JWT authentication?",
+    "should_trigger": false,
+    "note": "auth logic — backend"
+  },
+  {
+    "query": "Write a script to parse CSV files",
+    "should_trigger": false,
+    "note": "data processing"
+  }
+]

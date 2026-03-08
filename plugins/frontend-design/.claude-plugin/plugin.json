@@ -1,5 +1,5 @@
 {
   "name": "frontend-design",
-  "description": "A frontend design agent channeling a specific aesthetic philosophy.",
-  "version": "1.0.0"
+  "description": "Use this skill for frontend UI design tasks — designing or reviewing components, specifying CSS with concrete values, layout and spacing decisions, typography selection, color systems, dark mode, and visual polish.",
+  "version": "1.1.0"
 }
