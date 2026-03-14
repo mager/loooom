@@ -78,11 +78,11 @@
     {
       "name": "blog-seo",
       "source": "./plugins/blog-seo",
-      "description": "Audit and fix SEO frontmatter for magerblog (Astro) posts. Checks keywords, descriptions, heroImages, and title format. Runs spec compliance and LLM-as-judge quality evals.",
-      "version": "1.0.0",
+      "description": "Audit and fix SEO metadata for any blog or site. Works with Astro, Hugo, Jekyll, Next.js MDX, Ghost, or plain markdown. Runs spec compliance scans and LLM-as-judge quality evals on titles and descriptions.",
+      "version": "2.0.0",
       "author": { "name": "mager" },
       "category": "writing",
-      "keywords": ["seo", "blog", "frontmatter", "astro", "content", "writing"],
+      "keywords": ["seo", "blog", "frontmatter", "astro", "hugo", "jekyll", "content", "writing", "evals"],
       "homepage": "https://loooom.xyz/p/mager/blog-seo",
       "license": "MIT"
     }
