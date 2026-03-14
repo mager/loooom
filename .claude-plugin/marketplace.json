@@ -74,6 +74,17 @@
       "keywords": ["design", "frontend", "ui", "ux", "css"],
       "homepage": "https://loooom.xyz/p/mager/frontend-design",
       "license": "MIT"
+    },
+    {
+      "name": "blog-seo",
+      "source": "./plugins/blog-seo",
+      "description": "Audit and fix SEO frontmatter for magerblog (Astro) posts. Checks keywords, descriptions, heroImages, and title format. Runs spec compliance and LLM-as-judge quality evals.",
+      "version": "1.0.0",
+      "author": { "name": "mager" },
+      "category": "writing",
+      "keywords": ["seo", "blog", "frontmatter", "astro", "content", "writing"],
+      "homepage": "https://loooom.xyz/p/mager/blog-seo",
+      "license": "MIT"
     }
   ]
 }
