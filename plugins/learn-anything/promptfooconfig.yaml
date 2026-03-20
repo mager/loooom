@@ -1,10 +1,15 @@
 description: "Quality eval for loooom/learn-anything"
 
 providers:
-  - id: anthropic:claude-haiku-3-5
+  - id: openai:chat:llama-3.3-70b-versatile
+    config:
+      apiBaseUrl: https://api.groq.com/openai/v1
 
 evaluateOptions:
-  rubricProvider: anthropic:claude-haiku-3-5
+  rubricProvider:
+    id: openai:chat:llama-3.3-70b-versatile
+    config:
+      apiBaseUrl: https://api.groq.com/openai/v1
 
 
 prompts:
