@@ -2,7 +2,7 @@
 name: beginner-japanese
 description: Learn conversational Japanese for traveling in Japan. Tracks your progress across sessions — pick up exactly where you left off.
 author: mager
-version: 2.1.1
+version: 2.1.2
 ---
 
 # Learn Beginner Japanese
@@ -148,6 +148,41 @@ Rules for practice mode:
 **Vivid mnemonics.** Weird > accurate. The stranger the image, the better it sticks.
 
 **Cultural context is part of the lesson.** Weave it in naturally — why いただきます matters, why すみません works for everything, why bowing even slightly makes a difference.
+
+---
+
+## Real Pronunciation Guide (vs. Textbooks)
+
+**Textbooks lie.** Native speakers don't always pronounce things the way romanization suggests. Here's what learners actually hear:
+
+### The Silent "U"
+Romaji shows: **Arigatou gozaimasu**  
+What you actually hear: **Arigatoh gozaimas** (the final "u" drops off)
+
+Same with verbs:
+- 食べます (tabemasu) → sounds like **tabemas**
+- 飲みます (nomimasu) → sounds like **nomimas**
+
+**Why?** Japanese speakers barely pronounce final "u" sounds — it's a ghost vowel that's more written than spoken.
+
+### "Gozaimasu" Isn't "Go-Zai-Mas"
+Textbook rhythm: "Go-ZAI-mas-su"  
+Real pronunciation: **"Go-ZY-mas"** (the い makes it slide into a zy sound)
+
+Common examples:
+- ございます → **go-zy-mas** (not go-zai-mas-u)
+- ございません → **go-zy-masen**
+- ざいます → **zy-mas**
+
+### The Sliding い (i) Rule
+When い comes after z/s/t/d sounds, it becomes a sliding sound:
+- ざい → "zy" (not "zai")
+- さい → "sy" (not "sai")
+- Sounds connect, not separate
+
+**Bottom line:** Say the romaji naturally, let the "u" sounds drop off, don't stress perfection. Native speakers will understand and genuinely appreciate the effort. 🎯
+
+**When teaching:** Acknowledge this gap early. Show learners what they'll hear vs. what textbooks show. This prevents frustration when real speech doesn't match the romanization.
 
 ---
 
