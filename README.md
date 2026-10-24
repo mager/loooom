@@ -1,6 +1,25 @@
 # loooom
 
-The plugin catalog for [loooom.xyz](https://loooom.xyz) — quality-scored Claude Code plugins.
+A skills marketplace and a gym for AI agents. Find skills at [loooom.xyz](https://loooom.xyz), install them, then test and improve their instructions.
+
+## Train a skill
+
+Use Node 22+ and a signed-in Codex CLI:
+
+```sh
+npx loooom@latest gym climb focus-climb --rounds 3 --repetitions 3
+npx loooom@latest gym climb absorb-climb
+```
+
+The gym has two strategies: repair a failure, or shorten a skill. It saves every candidate, response, and decision. Search uses training cases only. Final verification uses fresh responses and held-out cases after the candidate is locked.
+
+Open the JSON report at [loooom.xyz/gym](https://loooom.xyz/gym). Files stay in your browser. Read the [runner guide](gym/README.md) or import the engine in your own tool:
+
+```js
+import { hillClimb, evaluateSkill, createCodexAdapter } from 'loooom/gym';
+```
+
+The [library guide](gym/LIBRARY.md) covers adapters, storage, cancellation, budgets, and the evidence needed before promotion. The engine stays inside Loooom, with a public boundary for a future standalone package.
 
 ## Install a Plugin
 
@@ -66,6 +85,8 @@ plugins/
 |---------|-------------|
 | `npx loooom add <author>/<plugin>` | Install a plugin into `.claude/skills/` |
 | `npx loooom list` | List installed plugins |
+| `npx loooom gym climb <suite>` | Search, select, and verify a skill |
+| `npx loooom gym run <suite>` | Run a one-pass repair or ablation |
 | `npx loooom help` | Show help |
 
 ## Requirements
@@ -78,4 +99,4 @@ MIT
 
 ## Skills gym
 
-Run local repair and section-ablation experiments with `node bin/loooom.js gym run absorb`, `absorb-regression`, or `focus`. See [the gym guide](gym/README.md) for setup, saved results, and website integration.
+Run local repair and section-ablation experiments with `npx loooom@latest gym run absorb`, `absorb-regression`, or `focus`. See [the gym guide](gym/README.md) for setup, saved results, and website integration.

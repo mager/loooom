@@ -9,7 +9,7 @@ export function validateSuite(suite) {
   if (!Array.isArray(suite.cases) || suite.cases.length < 2) throw new Error('A suite needs training and holdout cases.');
   const ids = new Set();
   for (const c of suite.cases) {
-    if (!c.id || ids.has(c.id) || !['train', 'holdout'].includes(c.split) || !c.prompt?.trim() || !c.title?.trim() || !Array.isArray(c.criteria) || !c.criteria.length || c.criteria.some(x => typeof x !== 'string' || !x.trim())) throw new Error('Invalid or duplicate test case.');
+    if (!c || typeof c.id !== 'string' || !/^[a-z][a-z0-9-]*$/.test(c.id) || ids.has(c.id) || !['train', 'holdout'].includes(c.split) || typeof c.prompt !== 'string' || !c.prompt.trim() || typeof c.title !== 'string' || !c.title.trim() || !Array.isArray(c.criteria) || !c.criteria.length || c.criteria.some(x => typeof x !== 'string' || !x.trim())) throw new Error('Invalid or duplicate test case.');
     ids.add(c.id);
   }
   if (!suite.cases.some(c => c.split === 'train') || !suite.cases.some(c => c.split === 'holdout')) throw new Error('Keep at least one case out of the repair prompt.');

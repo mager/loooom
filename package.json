@@ -1,22 +1,43 @@
 {
   "name": "loooom",
-  "version": "0.2.0",
-  "description": "Add skills from loooom.xyz to your project",
+  "version": "0.3.0",
+  "description": "Install agent skills and run local repair and ablation evaluations",
   "bin": {
     "loooom": "./bin/loooom.js"
   },
   "type": "module",
   "license": "MIT",
-  "repository": "https://github.com/mager/loooom-cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mager/loooom.git"
+  },
   "keywords": [
     "skills",
     "ai",
     "agents",
-    "claude",
+    "evaluations",
+    "gym",
     "loooom"
   ],
   "scripts": {
     "test": "node --test tests/*.test.js",
     "gym": "node bin/loooom.js gym"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "files": [
+    "bin/loooom.js",
+    "src/",
+    "gym/examples/",
+    "gym/README.md",
+    "gym/LIBRARY.md",
+    "gym/candidates/"
+  ],
+  "exports": {
+    "./gym": {
+      "types": "./src/gym/index.d.ts",
+      "import": "./src/gym/index.js"
+    }
   }
 }
