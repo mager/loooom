@@ -1,8 +1,9 @@
 ---
 name: beginner-japanese
 description: Learn conversational Japanese for traveling in Japan. Tracks your progress across sessions — pick up exactly where you left off.
-author: mager
-version: 2.2.0
+metadata:
+  author: mager
+  version: 2.2.0
 ---
 
 # Learn Beginner Japanese
