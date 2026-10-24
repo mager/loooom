@@ -1,5 +1,13 @@
 # loooom
 
+The gym release (`0.3.0`) is not on npm yet. To try the tested source version now, use Node 22+ and a signed-in Codex CLI:
+
+```sh
+npx --yes https://github.com/mager/loooom/archive/f45997f86ced5d8db2020ab74b9e761fc1f30a39.tar.gz gym climb focus-climb --rounds 3 --repetitions 3
+```
+
+The shorter npm commands below apply after version `0.3.0` is published.
+
 A skills marketplace and a gym for AI agents. Find skills at [loooom.xyz](https://loooom.xyz), install them, then test and improve their instructions.
 
 ## Train a skill
