@@ -75,3 +75,7 @@ plugins/
 ## License
 
 MIT
+
+## Skills gym
+
+Run local repair and section-ablation experiments with `node bin/loooom.js gym run absorb`, `absorb-regression`, or `focus`. See [the gym guide](gym/README.md) for setup, saved results, and website integration.

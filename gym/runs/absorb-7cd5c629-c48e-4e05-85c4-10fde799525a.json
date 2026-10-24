@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "id": "absorb-7cd5c629-c48e-4e05-85c4-10fde799525a",
+  "startedAt": "2026-10-24T21:47:47.970Z",
+  "status": "no-defect",
+  "suite": {
+    "title": "Recall before reveal",
+    "description": "Find where a learning coach gives away the answer before the learner can try.",
+    "strategy": "repair",
+    "cases": [
+      {
+        "id": "recall-first",
+        "split": "train",
+        "title": "Start a recall round",
+        "prompt": "I just studied this note: A checksum detects accidental changes in data. A backup is a separate copy used to restore data. Replication keeps copies synchronized. Quiz me on these ideas so I can see what I remember.",
+        "criteria": [
+          "Starts an active-recall task instead of only giving study advice.",
+          "Does not state the answer to any question it asks, including in hints, examples, or an answer key, before the learner attempts it."
+        ]
+      },
+      {
+        "id": "overloaded-learner",
+        "split": "train",
+        "title": "Keep the first step small",
+        "prompt": "I am overwhelmed by a long chapter and I only have five minutes. I studied this: a queue is first in, first out; a stack is last in, first out. Help me practice now, one small step at a time.",
+        "criteria": [
+          "Asks only one recall question in this turn, then waits for the learner.",
+          "Does not reveal the answer to its recall question in the same response.",
+          "Fits the immediate practice within five minutes."
+        ]
+      },
+      {
+        "id": "correct-after-attempt",
+        "split": "train",
+        "title": "Give feedback after an attempt",
+        "prompt": "We are practicing retrieval. You asked what a checksum does. My attempt: it restores lost files. That is my best try. Please correct me now and help me remember the difference from a backup.",
+        "criteria": [
+          "Clearly corrects the attempt: a checksum detects changes; a backup can restore data.",
+          "Provides feedback now rather than demanding another unsupported attempt."
+        ]
+      },
+      {
+        "id": "fresh-topic",
+        "split": "holdout",
+        "title": "Transfer to a new subject",
+        "prompt": "I studied two terms: evaporation changes liquid into gas; condensation changes gas into liquid. Give me one recall question now and wait for my answer.",
+        "criteria": [
+          "Asks exactly one recall question.",
+          "Does not state the answer or give it away through a hint before the learner attempts it."
+        ]
+      }
+    ],
+    "id": "absorb",
+    "sourceUrl": "https://github.com/mager/loooom.xyz/blob/aa4dcee816171f8483ccd46dac55e5c8ce7d5287/skills/absorb/SKILL.md",
+    "sourceCommit": "aa4dcee816171f8483ccd46dac55e5c8ce7d5287",
+    "version": 1
+  },
+  "suiteHash": "f0b481c10d0a64bfd030d7d49c46f1943d6db8478155e10fea9f183926eb25bd",
+  "strategy": "repair",
+  "runner": {
+    "name": "codex-cli",
+    "version": "codex-cli 0.154.0",
+    "model": "gpt-6-astra",
+    "judge": "Same model, separate session; variant label and skill hidden",
+    "repetitions": 1
+  },
+  "baseline": {
+    "hash": "2abb53ec8f881315cce7bc08f4cc61608ba8365086d20d93955e34571beb7b05",
+    "words": 915,
+    "bytes": 5707,
+    "content": "---\nname: absorb\ndescription: Learn anything faster\nmetadata:\n  author: mager\n  version: 1.0.0\n  category: Mind\n  tags: [learning, study, memory]\n---\n\n# absorb\n\nMost people learn the way they were taught in school — reread, highlight, cram — and most of that is close to useless. The methods that actually move information into long-term memory are well-studied, counterintuitive, and underused. They feel harder and slower in the moment, which is exactly why they work and exactly why people avoid them. This skill is how to learn things so they stick.\n\n## What actually makes things stick\n\nReal learning isn't about getting information *in*; it's about being able to get it back *out*. Three principles drive that:\n\n- **Retrieval** — pulling information out of your head (testing yourself) builds memory far more than putting it back in (rereading).\n- **Difficulty** — effortful, slightly uncomfortable practice produces durable learning. Easy, fluent review produces the *illusion* of learning.\n- **Spacing** — revisiting material over spread-out intervals beats massing it all at once.\n\nThe uncomfortable truth: if studying feels easy and fluent, you're probably not learning much.\n\n## The Method\n\n### 1. Test yourself, don't reread\n\nThe most powerful and most neglected technique: **active recall**. After reading or watching something, close it and try to reproduce the key ideas from memory — write them out, say them aloud, answer questions. The struggle to retrieve *is* the learning; rereading just makes the material feel familiar, which you mistake for knowing it. Turn everything into self-tests.\n\n### 2. Space it out\n\nCramming gets you through Friday's test and out of your head by Monday. Instead, revisit material at expanding intervals — a day later, a few days, a week, two weeks. Each effortful retrieval after partial forgetting strengthens the memory more than a fresh reread would. This is why a little every day beats a marathon the night before.\n\n### 3. Explain it simply (the Feynman technique)\n\nTry to teach the concept in plain language, as if to a smart 12-year-old, without jargon. The moment you stumble or reach for a buzzword to paper over a gap, you've found exactly what you don't actually understand. Go back, fill that specific hole, and try again. Explaining ruthlessly exposes the difference between recognizing something and understanding it.\n\n### 4. Interleave instead of blocking\n\nDon't drill one type of problem twenty times in a row (blocking) — it feels productive but mostly trains short-term mimicry. Mix related topics or problem types (interleaving). It's harder and feels messier, but it forces you to choose the right approach each time, which is what you actually need to do in the real world.\n\n### 5. Learn by doing, fast\n\nFor most skills, you learn by producing, not just consuming. Don't watch ten tutorials before you start — do the thing badly, immediately, and let the friction show you what to learn next. Build the project, have the conversation, write the code, cook the dish. Application turns fragile head-knowledge into something that holds.\n\n### 6. Embrace the productive struggle\n\nTrying to answer *before* you know how, struggling, and even failing primes you to learn the answer better than being handed it cleanly. Don't peek too soon. The discomfort of not-knowing-yet is the feeling of learning happening, not the feeling of doing it wrong.\n\n## Why studying fails\n\n- **Rereading and highlighting** → it feels productive and builds familiarity, not memory. Switch to self-testing.\n- **Cramming** → great for tomorrow, gone by next week. Space it instead.\n- **Fooled by fluency** → smooth review feels like mastery; it isn't. If it's easy, add difficulty (recall, interleave).\n- **Passive consumption** → endless tutorials and videos with no production. Do the thing, badly, now.\n- **Highlight-without-recall** → a yellow page you never test yourself on teaches almost nothing.\n- **Peeking too soon** → grabbing the answer the second it's hard skips the struggle that does the work.\n\n## A worked example\n\nSomeone's learning a language from an app and \"isn't retaining anything.\" They do passive lessons, reread vocab lists, and binge grammar videos.\n\nRebuild around retrieval. Replace rereading vocab with self-quizzing: cover the translation, recall it, check — and put the missed words on a spaced schedule so they come back tomorrow, then in a few days, then next week. Replace passive grammar videos with the Feynman move: explain the rule out loud in plain words; wherever they stumble is the gap to fix. Most important, *use it badly, immediately* — have a clumsy real conversation or write a few messy sentences, and let the gaps surface what to study next.\n\nSame hours, dramatically more retained — because the effort moved from putting information in to pulling it back out.\n\n## Agent Behavior\n\nWhen this skill is active:\n\n- Convert whatever they're studying into active-recall practice: ask them questions, make them reproduce ideas from memory rather than restate them.\n- Push spacing over cramming, and set up a simple expanding-interval schedule for review.\n- Use the Feynman move often: have them explain the concept in plain language and catch where they reach for jargon.\n- Warn against the fluency illusion — when review feels easy, that's the signal to add difficulty, not stop.\n- Get them producing/doing early and badly, instead of consuming more material.\n- Protect the productive struggle; don't hand over answers the instant something is hard — let them attempt first.\n- Reassure them that the harder, slower feeling is the method working, not a sign they're bad at learning.\n",
+    "results": [
+      {
+        "id": "recall-first",
+        "response": "Cover the note. Answer from memory before you check. Some effort is expected.\n\n1. A file changes by accident. What can help detect the change?\n2. You delete a file and need to restore it. What do you need?\n3. Two copies must stay synchronized. What process does this?\n4. Explain checksum, backup, and replication in plain words. What is each one used for?\n\n### Next Steps\nSend your answers. I will check them. Test yourself again tomorrow, in three days, and in one week.",
+        "elapsedMs": 8923,
+        "checks": [
+          {
+            "criterion": "Starts an active-recall task instead of only giving study advice.",
+            "pass": true,
+            "reason": "Tells the learner to cover the note and answer four questions from memory."
+          },
+          {
+            "criterion": "Does not state the answer to any question it asks, including in hints, examples, or an answer key, before the learner attempts it.",
+            "pass": true,
+            "reason": "Asks for the terms and their uses without giving the correct matches or definitions."
+          }
+        ],
+        "passed": true
+      },
+      {
+        "id": "overloaded-learner",
+        "response": "We can use five minutes for small practice steps. Keep your notes closed. Take time to think; some effort is normal.\n\nItems A, B, then C enter a queue. Which item leaves first?\n\n## Next Steps\nReply with one letter. I will check your answer before we continue.",
+        "elapsedMs": 6973,
+        "checks": [
+          {
+            "criterion": "Asks only one recall question in this turn, then waits for the learner.",
+            "pass": true,
+            "reason": "Asks which item leaves the queue first and requests a reply before continuing."
+          },
+          {
+            "criterion": "Does not reveal the answer to its recall question in the same response.",
+            "pass": true,
+            "reason": "Does not identify the item that leaves first or state the queue rule."
+          },
+          {
+            "criterion": "Fits the immediate practice within five minutes.",
+            "pass": true,
+            "reason": "Gives one short question that requires a one-letter answer."
+          }
+        ],
+        "passed": true
+      },
+      {
+        "id": "correct-after-attempt",
+        "response": "A checksum helps **detect a change in data**. It does not restore lost files. A backup is a saved copy that you can use to restore files.\n\nTo check a file, calculate its checksum and compare it with the original checksum. A difference shows that the data changed.\n\nRemember: **Checksum checks. Backup brings back.**\n\nYour attempt showed which idea needed correction. That is useful practice.\n\n### Next Steps\nClose this answer and try from memory:\n1. A file is missing. Which can restore it: a checksum or a backup?\n2. Explain what a checksum does in one simple sentence.\n\nTest yourself again tomorrow, in three days, and in one week.",
+        "elapsedMs": 9740,
+        "checks": [
+          {
+            "criterion": "Clearly corrects the attempt: a checksum detects changes; a backup can restore data.",
+            "pass": true,
+            "reason": "States that a checksum detects data changes and that a backup can restore files."
+          },
+          {
+            "criterion": "Provides feedback now rather than demanding another unsupported attempt.",
+            "pass": true,
+            "reason": "Gives the correction, an explanation, and a memory aid before further practice."
+          }
+        ],
+        "passed": true
+      },
+      {
+        "id": "fresh-topic",
+        "response": "What is the term for the change from gas to liquid?\n\n### Next Steps\nAnswer from memory, without looking at your notes.",
+        "elapsedMs": 5846,
+        "checks": [
+          {
+            "criterion": "Asks exactly one recall question.",
+            "pass": true,
+            "reason": "Asks only for the term for the change from gas to liquid."
+          },
+          {
+            "criterion": "Does not state the answer or give it away through a hint before the learner attempts it.",
+            "pass": true,
+            "reason": "Does not name condensation or provide a hint. Next Steps: No further checks are needed."
+          }
+        ],
+        "passed": true
+      }
+    ]
+  },
+  "candidate": null,
+  "decision": {
+    "accepted": false,
+    "fixed": [],
+    "regressions": [],
+    "wordsRemoved": 0,
+    "reductionPercent": 0,
+    "reason": "No training defect found. Add a useful failing case before making a repair."
+  },
+  "limitation": "One response per case. Model-graded; human review required. Holdout cases are hidden from the repair prompt, not a large independent benchmark.",
+  "finishedAt": "2026-10-24T21:48:28.643Z"
+}

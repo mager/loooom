@@ -8,5 +8,15 @@
   "type": "module",
   "license": "MIT",
   "repository": "https://github.com/mager/loooom-cli",
-  "keywords": ["skills", "ai", "agents", "claude", "loooom"]
+  "keywords": [
+    "skills",
+    "ai",
+    "agents",
+    "claude",
+    "loooom"
+  ],
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "gym": "node bin/loooom.js gym"
+  }
 }
