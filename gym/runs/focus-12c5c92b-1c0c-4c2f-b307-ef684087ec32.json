@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "id": "focus-12c5c92b-1c0c-4c2f-b307-ef684087ec32",
+  "startedAt": "2026-10-24T21:48:31.376Z",
+  "status": "rejected",
+  "suite": {
+    "title": "Less text, same practice",
+    "description": "Remove the explanation and worked example. Test whether the behavior instructions still do the job.",
+    "strategy": "ablate",
+    "cases": [
+      {
+        "id": "start-report",
+        "split": "train",
+        "title": "Start one concrete task",
+        "prompt": "I have a report due. I keep checking messages instead of writing. I have 25 minutes now. Help me start.",
+        "criteria": [
+          "Chooses or asks for one concrete writing task.",
+          "Recommends removing distractions or batching messages.",
+          "Uses a block no longer than the available 25 minutes, with a break.",
+          "Gives a small first action and a shutdown or next-step note."
+        ]
+      },
+      {
+        "id": "too-many-tasks",
+        "split": "train",
+        "title": "Reduce task switching",
+        "prompt": "I keep switching between email, a slide deck, and code. I have 50 minutes before my next meeting. Give me a simple focus plan.",
+        "criteria": [
+          "Chooses one task or asks the user to choose one before the block.",
+          "Batches email or removes notifications.",
+          "Fits the block and break within 50 minutes.",
+          "Includes a shutdown note or next step."
+        ]
+      },
+      {
+        "id": "fresh-start",
+        "split": "holdout",
+        "title": "Help a stuck beginner",
+        "prompt": "I am putting off the opening paragraph of my essay. I have 20 minutes, a phone next to me, and too many tabs. Give me a practical first work block.",
+        "criteria": [
+          "Starts with one small writing action.",
+          "Moves the phone out of reach and closes irrelevant tabs.",
+          "Fits within 20 minutes and allows a break.",
+          "Ends with a note about where to resume.",
+          "Uses a helpful tone without blaming the learner."
+        ]
+      }
+    ],
+    "id": "focus",
+    "sourceUrl": "https://github.com/mager/loooom.xyz/blob/aa4dcee816171f8483ccd46dac55e5c8ce7d5287/skills/focus/SKILL.md",
+    "sourceCommit": "aa4dcee816171f8483ccd46dac55e5c8ce7d5287",
+    "version": 1
+  },
+  "suiteHash": "f09ce51ca4f35e695d1f2468e98d34c5659527c7136c03e08ad8d1f035203f71",
+  "strategy": "ablate",
+  "runner": {
+    "name": "codex-cli",
+    "version": "codex-cli 0.154.0",
+    "model": "gpt-6-astra",
+    "judge": "Same model, separate session; variant label and skill hidden",
+    "repetitions": 1
+  },
+  "baseline": {
+    "hash": "75045b51af2dc3ddeb5a8c56efd81e78fb43aeb0e85d6400d4cacdca5bf06536",
+    "words": 948,
+    "bytes": 5577,
+    "content": "---\nname: focus\ndescription: Do deep work in a noisy world\nmetadata:\n  author: mager\n  version: 1.0.0\n  category: Mind\n  tags: [focus, productivity, attention]\n---\n\n# focus\n\nThe ability to concentrate hard on one thing for a sustained stretch has become rare and therefore valuable. It feels like a character flaw when you can't do it — but it's mostly an environment and habit problem, not a willpower one. Your attention is being actively dismantled by design, and you can defend it with a few deliberate practices. This skill is how to actually get deep, focused work done.\n\n## What focus actually requires\n\nDeep work rests on three things, and the modern default kills all three:\n\n- **A single object of attention** — one task, not a switching blur. Multitasking is just fast, lossy switching.\n- **Removed temptation** — the distractions physically out of reach, not just resisted. Willpower loses to a buzzing phone every time.\n- **Protected blocks of time** — focus needs a runway; it can't happen in scattered two-minute gaps.\n\nThe enemy isn't weak willpower. It's a switching cost most people never account for.\n\n## The Method\n\n### 1. Pick one thing\n\nBefore a focus block, decide the *single* task. Not \"work on the project\" — one concrete, finishable chunk: \"draft the intro section.\" Vague intentions invite drift; a specific target gives your attention somewhere to land. One thing at a time isn't a limitation; it's the whole mechanism.\n\n### 2. Make distraction expensive\n\nThe phone in your pocket fragments your attention even face-down and silent, because part of you is monitoring it. Put it in another room — not just out of sight, out of *reach*. Close every tab and app not tied to the one task. Block the sites if you have to. The goal is to make the distraction cost a deliberate effort to get to, because in-the-moment willpower will lose.\n\n### 3. Work in real blocks\n\nAttention has a runway and a rhythm. Work in focused blocks — 25 minutes (a pomodoro) when you're rebuilding the muscle, up to 50–90 when it's strong — with real breaks between. Time-block them on your calendar like meetings; unprotected time gets eaten. One or two deep blocks a day is more than most people manage, and it's enough.\n\n### 4. Respect attention residue\n\nEvery time you switch tasks, a piece of your attention stays stuck on the last one — \"attention residue\" — and it can take many minutes to fully re-engage. This is why \"quickly checking\" a message mid-task is so costly: the check is 30 seconds, but the recovery is 10 minutes. Batch the shallow stuff (email, messages) into their own blocks instead of letting them interleave with deep work.\n\n### 5. Start ugly\n\nThe hardest part is starting, and the trap is waiting to feel ready or inspired. You won't. Lower the bar to \"just open the document and write one bad sentence,\" or \"just two minutes.\" Starting is what summons focus, not the other way around — motivation follows action, not the reverse.\n\n### 6. Make a shutdown\n\nWhen the block (or day) ends, close it deliberately: note where you stopped and the next step, then actually stop. An open loop (\"I should still be working\") leaks attention into your rest and makes the next start harder. A clean shutdown protects both your recovery and tomorrow's focus.\n\n## What's fragmenting you\n\n- **No single target** → \"work on stuff\" becomes browsing and tab-hopping. Pick one concrete task.\n- **The phone within reach** → it taxes your attention even untouched. Another room, not your pocket.\n- **Constant switching** → \"quick checks\" between tasks bleed you dry via residue. Batch shallow work.\n- **No protected time** → focus attempted in scattered gaps never gets going. Block real time and defend it.\n- **Waiting to feel ready** → motivation-first thinking. Start ugly; action creates the focus.\n- **Never stopping cleanly** → open loops follow you into rest, so you never recover or re-enter well. Shut down on purpose.\n\n## A worked example\n\nSomeone \"can't focus,\" has a report due, sits down \"to work on it,\" and three hours later has answered Slack, read the news, and written two sentences.\n\nRebuild it. One thing: \"write the findings section,\" not \"work on the report.\" Phone goes in the kitchen. Slack and email closed, news site blocked for the morning. One 50-minute block on the calendar, 9:00–9:50, treated as unmovable. They don't wait to feel inspired — they open the doc and write one rough sentence to break the seal. When the timer ends, they jot \"next: write the recommendations\" and take a real break, away from the screen. Shallow stuff (Slack, email) gets its own block at 11.\n\nSame person, same report — but now the three lost hours become one block of actual work, because the environment did the heavy lifting that willpower couldn't.\n\n## Agent Behavior\n\nWhen this skill is active:\n\n- Make them name the one concrete task for the block, not a vague project. Hold them to one.\n- Attack the environment first — phone location, open tabs, notifications — before talking about discipline or motivation.\n- Teach blocks and breaks; have them schedule protected time and start small (25 min) if focus is weak.\n- Name attention residue to explain why \"quick checks\" are so costly, and push batching of shallow work.\n- When they're stuck starting, lower the bar to \"start ugly / two minutes\" rather than waiting for motivation.\n- Build in a shutdown step so work doesn't bleed into rest.\n- Be compassionate: this is a trainable skill against an environment engineered to break it, not a personal failing.\n",
+    "results": [
+      {
+        "id": "start-report",
+        "response": "You can use these 25 minutes. Difficulty with focus is not a personal failure.\n\n1. Put your phone in another room. Close messages and unrelated tabs. Turn off notifications.\n2. Name one small task: “Write three rough points for the findings section.” Use this task, or name one other specific part of the report.\n3. Set a 25-minute timer. Protect this time for that task only. For the first two minutes, write one rough sentence. It does not need to be good.\n4. Keep messages closed until a separate message check after your break. A quick check leaves some attention on the message. This is called “attention residue,” and it makes writing harder to resume.\n5. In the last minute, note where you stopped and what to write next. Then stop and take a five-minute break away from the screen.\n\n### Next Steps\nMove your phone now. Name your one task, start the timer, and write the first rough sentence.",
+        "elapsedMs": 9756,
+        "checks": [
+          {
+            "criterion": "Chooses or asks for one concrete writing task.",
+            "pass": true,
+            "reason": "Suggests writing three rough points for the findings section."
+          },
+          {
+            "criterion": "Recommends removing distractions or batching messages.",
+            "pass": true,
+            "reason": "Moves the phone away, closes messages and unrelated tabs, and turns off notifications."
+          },
+          {
+            "criterion": "Uses a block no longer than the available 25 minutes, with a break.",
+            "pass": true,
+            "reason": "Sets a 25-minute work block followed by a five-minute break."
+          },
+          {
+            "criterion": "Gives a small first action and a shutdown or next-step note.",
+            "pass": true,
+            "reason": "Starts writing with one rough sentence and asks for a note on where to stop and what to write next."
+          }
+        ],
+        "passed": true
+      },
+      {
+        "id": "too-many-tasks",
+        "response": "Use these 50 minutes for one task. Switching is a habit you can change, not a personal failure.\n\n- **Minutes 0–5:** Put your phone in another room. Close email and turn off notifications. Choose either the slide deck or the code. Name one small result: “Draft slide 3” or “Fix one failing test.” Keep only the tools needed for that result open.\n- **Minutes 5–30:** Set a 25-minute timer. Work only on that result. Start with two minutes of rough work; it does not need to be good yet.\n- **Minutes 30–35:** Take a break away from the screen. Do not check messages.\n- **Minutes 35–45:** Continue the same task. If you finish early, check your work.\n- **Minutes 45–50:** Save your work. Write where you stopped and the next action. Close the task and prepare for your meeting.\n\nQuick email checks leave some attention on the previous task. This is called **attention residue**. Set a separate time for email after the meeting.\n\n## Next Steps\n\nName your one result now: “In this block, I will finish ___.” Then close the other apps and start.",
+        "elapsedMs": 10004,
+        "checks": [
+          {
+            "criterion": "Chooses one task or asks the user to choose one before the block.",
+            "pass": true,
+            "reason": "Asks the user to choose the slide deck or code and name one small result before work starts."
+          },
+          {
+            "criterion": "Batches email or removes notifications.",
+            "pass": true,
+            "reason": "Closes email, turns off notifications, and sets email checks after the meeting."
+          },
+          {
+            "criterion": "Fits the block and break within 50 minutes.",
+            "pass": true,
+            "reason": "The schedule includes preparation, work, a five-minute break, and shutdown within 50 minutes."
+          },
+          {
+            "criterion": "Includes a shutdown note or next step.",
+            "pass": true,
+            "reason": "Asks the user to save work and record where they stopped and the next action."
+          }
+        ],
+        "passed": true
+      },
+      {
+        "id": "fresh-start",
+        "response": "Your one task is to write a rough opening paragraph. It does not need to be perfect.\n\n1. **Minutes 0–2:** Put your phone in another room. Close all tabs except your essay and one source, if needed. Turn off notifications.\n2. **Minutes 2–4:** Set a timer for 15 minutes. Start with: “In this essay, I argue that…” Write for two minutes, even if the words are rough.\n3. **Minutes 4–17:** Build that sentence into one paragraph. Stay with this task. Do not check messages. A quick check leaves *attention residue*: part of your attention stays on the message after you return. Check messages after the block.\n4. **Minutes 17–18:** Save your work. Write one next action, such as “Make the main claim clearer.” Then stop.\n5. **Minutes 18–20:** Take a break away from the screen.\n\nDifficulty starting is not a personal failure. You can train this skill.\n\n### Next Steps\nMove your phone now. At the top of your document, write: “My task: draft one opening paragraph.”",
+        "elapsedMs": 11149,
+        "checks": [
+          {
+            "criterion": "Starts with one small writing action.",
+            "pass": true,
+            "reason": "Names a rough opening paragraph as the task and gives one sentence starter for the first writing action."
+          },
+          {
+            "criterion": "Moves the phone out of reach and closes irrelevant tabs.",
+            "pass": true,
+            "reason": "Puts the phone in another room and keeps only the essay and one needed source open."
+          },
+          {
+            "criterion": "Fits within 20 minutes and allows a break.",
+            "pass": true,
+            "reason": "Schedules preparation, writing, and saving through minute 18, then a two-minute break."
+          },
+          {
+            "criterion": "Ends with a note about where to resume.",
+            "pass": false,
+            "reason": "Includes a resume note in step 4, but ends with instructions to start the task instead."
+          },
+          {
+            "criterion": "Uses a helpful tone without blaming the learner.",
+            "pass": true,
+            "reason": "Allows rough writing and states that difficulty starting is not a personal failure."
+          }
+        ],
+        "passed": false
+      }
+    ]
+  },
+  "candidate": {
+    "hash": "a0bb5fe84567be61dbd6c507af46fcd47ccb6f071f412a29be66bd6b15212f7f",
+    "words": 157,
+    "bytes": 937,
+    "content": "---\nname: focus\ndescription: Do deep work in a noisy world\nmetadata:\n  author: mager\n  version: 1.0.0\n  category: Mind\n  tags: [focus, productivity, attention]\n---\n\n# focus\n\n## Agent Behavior\nWhen this skill is active:\n\n- Make them name the one concrete task for the block, not a vague project. Hold them to one.\n- Attack the environment first — phone location, open tabs, notifications — before talking about discipline or motivation.\n- Teach blocks and breaks; have them schedule protected time and start small (25 min) if focus is weak.\n- Name attention residue to explain why \"quick checks\" are so costly, and push batching of shallow work.\n- When they're stuck starting, lower the bar to \"start ugly / two minutes\" rather than waiting for motivation.\n- Build in a shutdown step so work doesn't bleed into rest.\n- Be compassionate: this is a trainable skill against an environment engineered to break it, not a personal failing.\n",
+    "rationale": "Keep frontmatter, title, and Agent Behavior. Remove background, method explanations, failure list, and worked example.",
+    "results": [
+      {
+        "id": "start-report",
+        "response": "First, put your phone in another room. Close messages and all tabs you do not need for the report. Turn off notifications for 25 minutes.\n\nName one task: “Write a rough first paragraph for the report.” Use that task for this block.\n\n- Minutes 0–2: Open the report. Write: “The main point of this report is…” Continue with rough sentences. Do not edit yet.\n- Minutes 2–23: Build that paragraph. When you want to check messages, make a mark on paper and return to writing.\n- Minutes 23–25: Save your work. Write down the next action. Close the report and take a short break.\n\nA quick message check leaves part of your attention on the message when you return. This is called **attention residue**. Keep message checks together in a separate period after the block.\n\nFocus is a skill you can train. Messages are designed to pull your attention; this is not a personal failure.\n\n## Next Steps\nSay your one task aloud. Set a 25-minute timer. Write the first rough sentence now.",
+        "elapsedMs": 11767,
+        "checks": [
+          {
+            "criterion": "Chooses or asks for one concrete writing task.",
+            "pass": true,
+            "reason": "Chooses writing a rough first paragraph for the report."
+          },
+          {
+            "criterion": "Recommends removing distractions or batching messages.",
+            "pass": true,
+            "reason": "Moves the phone away, closes messages, disables notifications, and groups message checks."
+          },
+          {
+            "criterion": "Uses a block no longer than the available 25 minutes, with a break.",
+            "pass": true,
+            "reason": "The plan lasts 25 minutes and includes closing the report and taking a break in minutes 23–25."
+          },
+          {
+            "criterion": "Gives a small first action and a shutdown or next-step note.",
+            "pass": true,
+            "reason": "Provides a sentence starter, then asks the user to save and record the next action."
+          }
+        ],
+        "passed": true
+      },
+      {
+        "id": "too-many-tasks",
+        "response": "First, put your phone out of reach. Close email and all tabs you do not need. Turn off notifications until the meeting.\n\nUse your 50 minutes like this:\n\n- **0–2 minutes:** Name one concrete task: “Draft slide 3” or “Fix the input check.” Choose one, not both.\n- **2–27 minutes:** Work only on that task. Start with a rough attempt for two minutes. If another task comes to mind, write it down and continue.\n- **27–32 minutes:** Take a break. Stand up and get water. Do not check messages.\n- **32–45 minutes:** Continue the same task.\n- **45–50 minutes:** Save your work, write the next action, and close the task. Prepare for your meeting.\n\nA quick check leaves **attention residue**: part of your attention stays on the previous task. Keep email for one planned period after the meeting.\n\nFocus is a skill you can train. Difficulty with it is not a personal failure.\n\n## Next Steps\nComplete this sentence: “For this block, my one task is ___.” Then start your timer.",
+        "elapsedMs": 10426,
+        "checks": [
+          {
+            "criterion": "Chooses one task or asks the user to choose one before the block.",
+            "pass": true,
+            "reason": "Asks the user to choose one concrete task before focused work starts."
+          },
+          {
+            "criterion": "Batches email or removes notifications.",
+            "pass": true,
+            "reason": "Turns off notifications and assigns email to one period after the meeting."
+          },
+          {
+            "criterion": "Fits the block and break within 50 minutes.",
+            "pass": true,
+            "reason": "The full plan takes 50 minutes, including a five-minute break."
+          },
+          {
+            "criterion": "Includes a shutdown note or next step.",
+            "pass": true,
+            "reason": "Reserves the last five minutes for saving work, recording the next action, and preparing for the meeting."
+          }
+        ],
+        "passed": true
+      },
+      {
+        "id": "fresh-start",
+        "response": "First, put your phone in another room. Turn off notifications. Close all tabs except your essay and one source you need.\n\nYour one task: write a rough opening paragraph. Say it clearly: “I will write one rough opening paragraph in this block.”\n\nUse your 20 minutes like this:\n\n- **Minutes 0–2:** Set up your space. Protect the remaining time from messages and other tasks.\n- **Minutes 2–4:** Start with two minutes of rough writing: “This essay is about ___. My main point is ___.” It can be poor. You only need a start.\n- **Minutes 4–17:** Build those lines into one paragraph. Leave a placeholder for any missing fact. Keep writing instead of opening more tabs.\n- **Minutes 17–18:** Save your work. Write one note about what to change next, then close the document.\n- **Minutes 18–20:** Take a break away from the screen.\n\nAvoid quick checks. They leave **attention residue**: part of your attention stays with the message or tab after you return. Group messages and other small tasks into a separate time after your break.\n\nFocus is a skill you can train. A difficult start is not a personal failure.\n\n### Next Steps\nMove your phone, close the tabs, and start the timer. Aim for one rough paragraph.",
+        "elapsedMs": 12973,
+        "checks": [
+          {
+            "criterion": "Starts with one small writing action.",
+            "pass": false,
+            "reason": "Starts with moving the phone and closing tabs. Writing begins only after setup."
+          },
+          {
+            "criterion": "Moves the phone out of reach and closes irrelevant tabs.",
+            "pass": true,
+            "reason": "Directs the user to put the phone in another room and keep only the essay and one needed source open."
+          },
+          {
+            "criterion": "Fits within 20 minutes and allows a break.",
+            "pass": true,
+            "reason": "The plan takes 20 minutes and reserves minutes 18–20 for a break."
+          },
+          {
+            "criterion": "Ends with a note about where to resume.",
+            "pass": true,
+            "reason": "At the end of the writing period, asks the user to save and write a note about what to change next."
+          },
+          {
+            "criterion": "Uses a helpful tone without blaming the learner.",
+            "pass": true,
+            "reason": "Allows rough writing and states that a difficult start is not a personal failure."
+          }
+        ],
+        "passed": false
+      }
+    ]
+  },
+  "decision": {
+    "accepted": false,
+    "fixed": [],
+    "regressions": [],
+    "wordsRemoved": 791,
+    "reductionPercent": 83,
+    "reason": "Candidate still fails at least one case."
+  },
+  "limitation": "One response per case. Model-graded; human review required. Holdout cases are hidden from the repair prompt, not a large independent benchmark.",
+  "finishedAt": "2026-10-24T21:50:10.011Z"
+}
