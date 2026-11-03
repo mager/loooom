@@ -1,0 +1,48 @@
+{
+  "title": "Less text, same practice",
+  "description": "Remove the explanation and worked example. Test whether the behavior instructions still do the job.",
+  "strategy": "ablate",
+  "cases": [
+    {
+      "id": "start-report",
+      "split": "train",
+      "title": "Start one concrete task",
+      "prompt": "I have a report due. I keep checking messages instead of writing. I have 25 minutes now. Help me start.",
+      "criteria": [
+        "Chooses or asks for one concrete writing task.",
+        "Recommends removing distractions or batching messages.",
+        "Uses a block no longer than the available 25 minutes, with a break.",
+        "Gives a small first action and a shutdown or next-step note."
+      ]
+    },
+    {
+      "id": "too-many-tasks",
+      "split": "train",
+      "title": "Reduce task switching",
+      "prompt": "I keep switching between email, a slide deck, and code. I have 50 minutes before my next meeting. Give me a simple focus plan.",
+      "criteria": [
+        "Chooses one task or asks the user to choose one before the block.",
+        "Batches email or removes notifications.",
+        "Fits the block and break within 50 minutes.",
+        "Includes a shutdown note or next step."
+      ]
+    },
+    {
+      "id": "fresh-start",
+      "split": "holdout",
+      "title": "Help a stuck beginner",
+      "prompt": "I am putting off the opening paragraph of my essay. I have 20 minutes, a phone next to me, and too many tabs. Give me a practical first work block.",
+      "criteria": [
+        "Includes one small writing action to begin the work; setup can come first.",
+        "Moves the phone out of reach and closes irrelevant tabs.",
+        "Fits within 20 minutes and allows a break.",
+        "Includes a shutdown note about where to resume; it need not be the final sentence.",
+        "Uses a helpful tone without blaming the learner."
+      ]
+    }
+  ],
+  "id": "focus",
+  "sourceUrl": "https://github.com/mager/loooom.xyz/blob/aa4dcee816171f8483ccd46dac55e5c8ce7d5287/skills/focus/SKILL.md",
+  "sourceCommit": "aa4dcee816171f8483ccd46dac55e5c8ce7d5287",
+  "version": 2
+}

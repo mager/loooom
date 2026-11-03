@@ -1,0 +1,71 @@
+{
+  "title": "Shorter focus, tested again",
+  "description": "Three search rounds, repeated samples, and a final check on fresh responses.",
+  "strategy": "ablate",
+  "cases": [
+    {
+      "id": "tight-window",
+      "title": "Fit the full time budget",
+      "split": "train",
+      "prompt": "I have exactly 20 minutes before I leave. I need to draft one paragraph. Give me a focus plan that includes setup, work, a shutdown note, and a real break, all within those 20 minutes.",
+      "criteria": [
+        "Chooses one concrete paragraph task and gives a small first writing action.",
+        "The complete plan including setup, work, shutdown, and a break fits within 20 minutes.",
+        "Includes a note about where to resume.",
+        "Removes or reduces distractions before the block."
+      ]
+    },
+    {
+      "id": "urgent-phone",
+      "title": "Protect necessary contact",
+      "split": "train",
+      "prompt": "I am on call for a family issue and must hear phone calls. I have 25 minutes total, including a break, to edit the opening of my report. How do I focus without missing a call?",
+      "criteria": [
+        "Preserves incoming urgent calls instead of telling the learner to make the phone unreachable or silence all calls.",
+        "Reduces other distractions and chooses one editing task.",
+        "Includes a small first action, a break, and a shutdown note within the total 25-minute budget."
+      ]
+    },
+    {
+      "id": "switching",
+      "title": "Stop switching tasks",
+      "split": "train",
+      "prompt": "I keep switching between email, code, and my slide deck. I have 35 minutes total including a break. Help me choose one concrete result and start now.",
+      "criteria": [
+        "Selects or asks the learner to select one concrete result, rather than splitting the block among all three tasks.",
+        "Batches email or pauses notifications.",
+        "Includes a first action, a break, and a resume note within 35 minutes total.",
+        "Uses a helpful tone without blaming the learner."
+      ]
+    },
+    {
+      "id": "short-creative-window",
+      "title": "Transfer to a creative task",
+      "split": "holdout",
+      "prompt": "I have 12 minutes before a meeting. I need to sketch a rough layout for a community garden, but keep reading inspiration pages. Include a brief break and the handoff to my meeting within those 12 minutes.",
+      "criteria": [
+        "Chooses a small concrete sketching result and a first action.",
+        "Stops unrelated browsing for the block.",
+        "All setup, drawing, shutdown, and break time fits inside 12 minutes.",
+        "Includes a note about what to do after the meeting."
+      ]
+    },
+    {
+      "id": "required-alert",
+      "title": "Keep a required alert active",
+      "split": "holdout",
+      "prompt": "I have 30 minutes total, including a break, to outline a lesson. My laptop must keep a required building-status alert active. It also has social apps open. Give me a realistic plan.",
+      "criteria": [
+        "Keeps the required alert active while reducing unrelated distractions.",
+        "Chooses one concrete outline result and a small first action.",
+        "Fits the full plan including a break and shutdown within 30 minutes.",
+        "Includes a note for the next work session."
+      ]
+    }
+  ],
+  "id": "focus-climb",
+  "sourceUrl": "https://github.com/mager/loooom.xyz/blob/aa4dcee816171f8483ccd46dac55e5c8ce7d5287/skills/focus/SKILL.md",
+  "sourceCommit": "aa4dcee816171f8483ccd46dac55e5c8ce7d5287",
+  "version": 1,
+  "skillName": "focus"
+}
