@@ -1,0 +1,67 @@
+{
+  "title": "Absorb under pressure",
+  "description": "Test short recall rounds, corrective feedback, and responsible guidance across repeated responses.",
+  "strategy": "repair",
+  "cases": [
+    {
+      "id": "no-answer-leak",
+      "title": "Keep the answer out of the question",
+      "split": "train",
+      "prompt": "I studied these facts: a queue removes the oldest item first; a stack removes the newest item first. I have three minutes. Ask me one active-recall question now without revealing the answer or asking any follow-up yet.",
+      "criteria": [
+        "Asks exactly one recall question and waits.",
+        "Does not reveal the target answer in the question, hints, examples, or explanation.",
+        "Does not add a second task such as explaining why before the learner answers."
+      ]
+    },
+    {
+      "id": "feedback-loop",
+      "title": "Correct after a real attempt",
+      "split": "train",
+      "prompt": "You asked what condensation means. My answer is liquid turning into gas. That is my best attempt. Correct it now, give me one short way to remember the distinction, and suggest when to review it again.",
+      "criteria": [
+        "Clearly corrects the answer: condensation is gas turning into liquid.",
+        "Gives a brief memory aid without withholding corrective feedback.",
+        "Suggests later spaced review rather than only immediate repetition."
+      ]
+    },
+    {
+      "id": "struggle-is-not-proof",
+      "title": "Do not mistake difficulty for progress",
+      "split": "train",
+      "prompt": "I have tried to memorize 40 unfamiliar terms for an hour. I got every one wrong and never checked the answers. Since the skill says discomfort is learning, should I keep doing exactly this? Give me a practical next step.",
+      "criteria": [
+        "Says to change the method rather than treating any discomfort as proof of learning.",
+        "Recommends checking correct answers or getting feedback and using a smaller or supported task.",
+        "Keeps recall practice with later spacing as part of the plan.",
+        "Does not blame the learner or claim that failed recall without feedback guarantees progress."
+      ]
+    },
+    {
+      "id": "new-recall",
+      "title": "Transfer recall to a fresh topic",
+      "split": "holdout",
+      "prompt": "My study note says a simile uses like or as to compare things, while a metaphor makes the comparison directly. Ask one question that tests my recall. Do not give a hint or the answer yet.",
+      "criteria": [
+        "Asks exactly one recall question.",
+        "Does not reveal its target answer in the question or any extra text."
+      ]
+    },
+    {
+      "id": "new-novice",
+      "title": "Give a beginner enough support",
+      "split": "holdout",
+      "prompt": "I want to learn two new concepts I have never seen: latency and throughput. I cannot recall definitions I have not learned. Give me a short first lesson, then one practice prompt, and tell me when to revisit it.",
+      "criteria": [
+        "Briefly teaches both latency and throughput accurately before expecting unsupported recall.",
+        "Offers one practice prompt rather than overwhelming the beginner.",
+        "Suggests a later review interval."
+      ]
+    }
+  ],
+  "id": "absorb-climb",
+  "sourceUrl": "https://github.com/mager/loooom.xyz/blob/aa4dcee816171f8483ccd46dac55e5c8ce7d5287/skills/absorb/SKILL.md",
+  "sourceCommit": "aa4dcee816171f8483ccd46dac55e5c8ce7d5287",
+  "version": 1,
+  "skillName": "absorb"
+}

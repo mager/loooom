@@ -1,3 +1,4 @@
+import { gym } from './gym/cli.js';
 import { mkdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
@@ -5,11 +6,14 @@ const API = 'https://loooom.xyz/api/skills';
 
 function help() {
   console.log(`
-  loooom — add skills from loooom.xyz
+  loooom — a skills marketplace and a gym
 
   Usage:
     npx loooom add <author>/<skill>   Add a skill to your project
     npx loooom search <query>         Search for skills (coming soon)
+    npx loooom gym climb focus-climb Search, select, and verify a shorter skill
+    npx loooom gym run absorb        Test and repair a skill with Codex
+    npx loooom gym run focus         Test a shorter skill
     npx loooom help                   Show this help
 
   Examples:
@@ -63,10 +67,13 @@ function search(_query) {
   console.log('  Coming soon');
 }
 
-export function run(args) {
+export async function run(args) {
   const cmd = args[0];
 
   switch (cmd) {
+    case 'gym':
+      await gym(args.slice(1));
+      break;
     case 'add':
       add(args[1]);
       break;

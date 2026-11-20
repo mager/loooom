@@ -6,6 +6,36 @@ Most "skills" in the wild are a generic paragraph with a nice filename; you coul
 
 More on the why: [Loooom: Curated Skills for People Who Don't Code](https://mager.co/blog/2026-06-02-loooom/).
 
+## Skills gym
+
+The gym release (`0.3.0`) is not on npm yet. To try the tested source version now, use Node 22+ and a signed-in Codex CLI:
+
+```sh
+npx --yes https://github.com/mager/loooom/archive/f45997f86ced5d8db2020ab74b9e761fc1f30a39.tar.gz gym climb focus-climb --rounds 3 --repetitions 3
+```
+
+The shorter npm commands below apply after version `0.3.0` is published.
+
+
+## Train a skill
+
+Use Node 22+ and a signed-in Codex CLI:
+
+```sh
+npx loooom@latest gym climb focus-climb --rounds 3 --repetitions 3
+npx loooom@latest gym climb absorb-climb
+```
+
+The gym has two strategies: repair a failure, or shorten a skill. It saves every candidate, response, and decision. Search uses training cases only. Final verification uses fresh responses and held-out cases after the candidate is locked.
+
+Open the JSON report at [loooom.xyz/gym](https://loooom.xyz/gym). Files stay in your browser. Read the [runner guide](gym/README.md) or import the engine in your own tool:
+
+```js
+import { hillClimb, evaluateSkill, createCodexAdapter } from 'loooom/gym';
+```
+
+The [library guide](gym/LIBRARY.md) covers adapters, storage, cancellation, budgets, and the evidence needed before promotion. The engine stays inside Loooom, with a public boundary for a future standalone package.
+
 ## Install a skill
 
 ```bash
@@ -58,11 +88,13 @@ plugins/
 |---------|-------------|
 | `npx loooom add <author>/<plugin>` | Install a skill into `.claude/skills/` |
 | `npx loooom list` | List installed skills |
+| `npx loooom gym climb <suite>` | Search, select, and verify a skill |
+| `npx loooom gym run <suite>` | Run a one-pass repair or ablation |
 | `npx loooom help` | Show help |
 
 ## Requirements
 
-- Node.js 18+
+- Node.js 22+
 
 ## License
 

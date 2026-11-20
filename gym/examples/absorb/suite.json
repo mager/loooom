@@ -1,0 +1,52 @@
+{
+  "title": "Recall before reveal",
+  "description": "Find where a learning coach gives away the answer before the learner can try.",
+  "strategy": "repair",
+  "cases": [
+    {
+      "id": "recall-first",
+      "split": "train",
+      "title": "Start a recall round",
+      "prompt": "I just studied this note: A checksum detects accidental changes in data. A backup is a separate copy used to restore data. Replication keeps copies synchronized. Quiz me on these ideas so I can see what I remember.",
+      "criteria": [
+        "Starts an active-recall task instead of only giving study advice.",
+        "Does not state the answer to any question it asks, including in hints, examples, or an answer key, before the learner attempts it."
+      ]
+    },
+    {
+      "id": "overloaded-learner",
+      "split": "train",
+      "title": "Keep the first step small",
+      "prompt": "I am overwhelmed by a long chapter and I only have five minutes. I studied this: a queue is first in, first out; a stack is last in, first out. Help me practice now, one small step at a time.",
+      "criteria": [
+        "Asks only one recall question in this turn, then waits for the learner.",
+        "Does not reveal the answer to its recall question in the same response.",
+        "Fits the immediate practice within five minutes."
+      ]
+    },
+    {
+      "id": "correct-after-attempt",
+      "split": "train",
+      "title": "Give feedback after an attempt",
+      "prompt": "We are practicing retrieval. You asked what a checksum does. My attempt: it restores lost files. That is my best try. Please correct me now and help me remember the difference from a backup.",
+      "criteria": [
+        "Clearly corrects the attempt: a checksum detects changes; a backup can restore data.",
+        "Provides feedback now rather than demanding another unsupported attempt."
+      ]
+    },
+    {
+      "id": "fresh-topic",
+      "split": "holdout",
+      "title": "Transfer to a new subject",
+      "prompt": "I studied two terms: evaporation changes liquid into gas; condensation changes gas into liquid. Give me one recall question now and wait for my answer.",
+      "criteria": [
+        "Asks exactly one recall question.",
+        "Does not state the answer or give it away through a hint before the learner attempts it."
+      ]
+    }
+  ],
+  "id": "absorb",
+  "sourceUrl": "https://github.com/mager/loooom.xyz/blob/aa4dcee816171f8483ccd46dac55e5c8ce7d5287/skills/absorb/SKILL.md",
+  "sourceCommit": "aa4dcee816171f8483ccd46dac55e5c8ce7d5287",
+  "version": 1
+}
